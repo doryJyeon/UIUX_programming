@@ -1,0 +1,208 @@
+/*
+	사용하는 색상 정리
+
+	main color(purple)
+	#A69AC4
+	light color
+	#F0EBF5
+	deep color
+	#75658F
+	dark (font)
+	#423B4D
+	cream color(body background)
+	#FDFAF6
+	yellow
+	#F6C94C
+	red
+	#E96B6B
+	blue
+	#8CAED7
+	green
+	#A9BF88
+*/
+
+body {
+	font-family: "Gowun Dodum", sans-serif;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 1.6;
+	margin: 0;
+	padding: 0;
+	background-color: #FDFAF6;
+}
+
+header,
+main,
+footer {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 24px;
+}
+
+header {
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+
+section {
+	margin-top: 70px;
+}
+
+footer {
+	padding-top: 32px;
+	padding-bottom: 22px;
+}
+
+footer p {
+	font-size: 14px;
+}
+
+nav {
+	display: flex;
+	gap: 24px;
+	margin-top: 24px;
+}
+
+nav a {
+	color: #75658F;
+	font-weight: bold;
+	letter-spacing: 1px;
+	text-decoration: none;
+	transition: color 0.2s, transform 0.2s;
+}
+
+nav a:hover {
+	color: #A69AC4;
+	transform: translateY(-5px);
+}
+
+nav a:focus {
+	outline: 2px solid #A9BF88;
+	outline-offset: 2px;
+	transform: translateY(-5px);
+}
+
+nav a:active {
+	outline: none;
+	color: #75658F;
+}
+
+h1 {
+	color: #332E3B;
+	font-size: 42px;
+	font-weight: 900;
+	line-height: 1.2;
+}
+
+h2 {
+	color: #332E3B;
+	font-size: 28px;
+	font-weight: 800;
+	line-height: 1.4;
+}
+
+h3 {
+	color: #75658F;
+	font-size: 20px;
+	font-weight: 700;
+	line-height: 1.5;
+}
+
+p {
+	color: #423B4D;
+	line-height: 1.7;
+	font-weight: 500;
+}
+
+#about img {
+	display: block;
+	width: 100%;
+	max-width: 800px;
+	height: auto;
+	margin: 20px auto;
+	border-radius: 2px;
+}
+
+.features-list {
+	list-style-type: none;
+	padding-left: 0;
+	margin: 0;
+	display: flex;
+	align-items: stretch;
+	gap: 24px;
+}
+
+.features-card {
+	flex: 1;
+	padding: 20px 24px;
+	margin-bottom: 16px;
+	border: 1px solid #A69AC4;
+	border-radius: 8px;
+	background-color: #F0EBF5;
+}
+
+.features-card>p {
+	font-weight: 500;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+.signup {
+	padding: 24px 24px 46px;
+	margin-bottom: 50px;
+	background-color: #F0EBF5;
+	border: 1px solid #A69AC4;
+	border-radius: 8px;
+}
+
+form {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+input,
+button {
+	font: inherit;
+}
+
+input {
+	flex: 1;
+	min-width: 100px;
+	padding: 5px 12px;
+	border: 1px solid #A69AC4;
+	border-radius: 6px;
+}
+
+button {
+	flex: 1;
+	padding: 6px 18px;
+	background-color: #75658F;
+	color: #FDFAF6;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+	transition: background-color 0.2s, transform 0.2s;
+}
+
+button:hover {
+	background-color: #A69AC4;
+	color: #423B4D;
+}
+
+button:focus,
+input:focus {
+	outline: 2px solid #A9BF88;
+	outline-offset: 2px;
+}
+
+button:active {
+	outline: none;
+	background-color: #75658F;
+	transform: scale(1.05);
+	color: #FDFAF6;
+}

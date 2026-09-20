@@ -3,6 +3,11 @@
 
 <head>
 	<meta charset="UTF-8">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
+
 	<title>Emotion diary</title>
 </head>
 
@@ -42,16 +47,16 @@
 		<section id="features">
 			<h2>감정 일기 기능 안내</h2>
 
-			<ul>
-				<li>
+			<ul class="features-list">
+				<li class="features-card">
 					<h3>감정 일기 작성</h3>
 					<p>하루동안 있었던 일과 느꼈던 감정을 자유롭게 기록해보세요.</p>
 				</li>
-				<li>
+				<li class="features-card">
 					<h3>AI 위로 받기</h3>
 					<p>작성한 일기를 바탕으로 AI의 따듯한 위로와 공감을 받아보세요.</p>
 				</li>
-				<li>
+				<li class="features-card">
 					<h3>정리된 감정 메모하기</h3>
 					<p>AI의 위로로 마음이 정리되었다면, 정리된 감정을 메모로 남겨보세요.</p>
 				</li>
@@ -69,17 +74,18 @@
 			</ol>
 		</section>
 
-		<section id="signup">
+		<section id="signup" class="signup">
 			<h2>회원가입</h2>
 
 			<form action="" method="">
+
 				<label for="email">이메일:</label>
 				<input type="email" id="email" name="email" required><br>
 
 				<label for="password">비밀번호:</label>
 				<input type="password" id="password" name="password" required><br>
 
-				<input type="submit" value="회원가입">
+				<button type="submit">회원가입</button>
 			</form>
 		</section>
 	</main>
