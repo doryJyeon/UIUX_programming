@@ -85,14 +85,20 @@
 				<label for="password">비밀번호:</label>
 				<input type="password" id="password" name="password" required><br>
 
-				<button type="submit">회원가입</button>
+				<button type="submit" id="signupButton">회원가입</button>
 			</form>
+
+			<p id="formMessage" class="" aria-live="polite">
+				비밀번호는 영어+숫자+특수문자(! @ # $ % ^ & *) 조합으로 8자 이상 입력해주세요.
+			</p>
 		</section>
 	</main>
 
 	<footer>
 		<p>&copy; 2026 감정 일기 서비스</p>
 	</footer>
+
+	<script src="script.js"></script>
 </body>
 
 </html>
