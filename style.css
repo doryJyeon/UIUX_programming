@@ -212,8 +212,9 @@ p {
 
 form {
 	display: flex;
-	align-items: center;
 	gap: 12px;
+	align-items: center;
+	flex-wrap: wrap;
 }
 
 input,
@@ -221,12 +222,13 @@ button {
 	font: inherit;
 }
 
-input {
+input:not([type="checkbox"]) {
 	flex: 1;
 	min-width: 100px;
 	padding: 5px 12px;
 	border: 1px solid #A69AC4;
 	border-radius: 6px;
+	margin-right: 10px;
 }
 
 button {
@@ -262,6 +264,15 @@ button:disabled {
 	background-color: lightgray;
 	color: #423B4D;
 	cursor: not-allowed;
+}
+
+.subscribe {
+	width: 100%;
+}
+
+.subscribe>input {
+	width: 16px;
+	height: 16px;
 }
 
 #formMessage {

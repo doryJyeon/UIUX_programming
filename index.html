@@ -81,16 +81,21 @@
 
 			<form action="" method="">
 				<label for="email">이메일:</label>
-				<input type="email" id="email" name="email" required><br class="m-none">
+				<input type="email" id="email" name="email" required>
 
 				<label for="password">비밀번호:</label>
-				<input type="password" id="password" name="password" required><br>
+				<input type="password" id="password" name="password" required>
 
 				<button type="submit" id="signupButton">회원가입</button>
+
+				<label for="subscribe" class="subscribe">
+					<input type="checkbox" name="subscribe" id="subscribe">
+					서비스 정보 수신에 동의합니다.
+				</label>
 			</form>
 
 			<p id="formMessage" class="" aria-live="polite">
-				비밀번호는 영어+숫자+특수문자(! @ # $ % ^ & *) 조합으로 8자 이상 입력해주세요.
+				수신 가능한 이메일을 사용해주세요.<br>수신 불가 이메일 사용 시 비밀번호를 찾을 수 없습니다.
 			</p>
 		</section>
 	</main>
