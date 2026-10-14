@@ -52,7 +52,11 @@ signupForm.addEventListener("change", (e) => {
 signupForm.addEventListener("input", (e) => {
     // 이메일(50자 제한)
     if (e.target.id === "email") {
-        e.target.value.length > 50 && changeMessage("50자 미만의 이메일을 사용해주세요.", "c-danger");
+        if (e.target.value.length > 50) {
+            changeMessage("50자 미만의 이메일을 사용해주세요.", "c-danger");
+        } else {
+            changeMessage("", "");
+        }
     }
     // password
     if (e.target.id === "password") {
