@@ -1,5 +1,7 @@
 const signupForm = document.querySelector("#signup");
 const formMessage = document.querySelector("#formMessage");
+const featureTabs = document.querySelectorAll("#featureTabs > button");
+const featureCards = document.querySelectorAll("#featureCards > div");
 // 비밀번호 유효성 정규식
 const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
 
@@ -62,3 +64,18 @@ signupForm.addEventListener("input", (e) => {
         }
     }
 });
+
+// 기능 안내 show
+function showFeature(target, el) {
+    const showTab = document.querySelector(`#feature${target}`);
+    // 새로운 tab 선택 시 작동
+    if (!showTab.classList.contains("active")) {
+        featureTabs.forEach((item, idx) => {
+            item.classList.remove("active");
+            featureCards[idx].classList.remove("active");
+        });
+        // 해당 item만 active 추가
+        showTab.classList.add("active");
+        el.classList.add("active");
+    }
+}

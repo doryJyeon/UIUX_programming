@@ -49,20 +49,41 @@
 		<section id="features">
 			<h2>감정 일기 기능 안내</h2>
 
-			<ul class="features-list">
-				<li class="features-card">
+			<div class="feature-tabs" id="featureTabs" role="tab-list" aria-label="기능 선택 탭">
+				<button id="tabWirte" class="active" onclick="showFeature('Wirte', this)">일기 작성</button>
+				<button id="tabRead" onclick="showFeature('Read', this)">AI 위로</button>
+				<button id="tabMemo" onclick="showFeature('Memo', this)">메모 작성</button>
+			</div>
+			<div class="feature-cards" id="featureCards" aria-label="기능 상세 안내">
+				<div class="feature-card active" id="featureWirte">
+					<img src="assets/images/wirte.png" alt="일기를 작성하는 모습의 이미지" />
 					<h3>감정 일기 작성</h3>
-					<p>하루동안 있었던 일과 느꼈던 감정을 자유롭게 기록해보세요.</p>
-				</li>
-				<li class="features-card">
+					<p>
+						"오늘의 마음을 있는 그대로 작성해 보세요."<br>
+						하루 동안 느낀 기쁨과 슬픔, 솔직한 감정들까지. 친한 친구에게도 하지 못한
+						속마음을 일기장에 편하게 작성해보세요.
+						작성자 외에는 아무도 볼 수 없어 <b>완벽한 비밀이 보장</b>됩니다.
+					</p>
+				</div>
+				<div class="feature-card" id="featureRead">
+					<img src="assets/images/ai_read.png" alt="ai가 일기를 읽고 생각하는 모습의 이미지" />
 					<h3>AI 위로 받기</h3>
-					<p>작성한 일기를 바탕으로 AI의 따듯한 위로와 공감을 받아보세요.</p>
-				</li>
-				<li class="features-card">
+					<p>
+						"나만을 위한 AI의 따뜻한 공감과 위로"<br>
+						작성하신 일기를 바탕으로 AI 봇이 진심 어린 위로의 답장을 건네어 드립니다.
+						혼자 간직하기엔 무거웠던 감정들, 이제는 <b>AI의 다정한 피드백</b>과 함께 마음을 한결 가볍게 비워내 보세요.
+					</p>
+				</div>
+				<div class="feature-card" id="featureMemo">
+					<img src="assets/images/memo.png" alt="ai의 위로를 보고난 후 메모를 붙인 모습의 이미지" />
 					<h3>정리된 감정 메모하기</h3>
-					<p>AI의 위로로 마음이 정리되었다면, 정리된 감정을 메모로 남겨보세요.</p>
-				</li>
-			</ul>
+					<p>
+						"정리된 감정을 메모로 남갸보세요."<br>
+						AI의 위로를 통해 마음이 한결 가벼워졌나요?<br>
+						<b>정리된 감정과 새로워진 마음을 메모로 기록</b>하며 오늘 하루를 기분 좋게 마무리해 보세요.
+					</p>
+				</div>
+			</div>
 		</section>
 
 		<section id="steps">
