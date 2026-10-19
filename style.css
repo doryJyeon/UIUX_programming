@@ -30,6 +30,7 @@ body {
 	padding: 0;
 	background-color: #FDFAF6;
 	word-break: keep-all;
+	position: relative;
 }
 
 *,
@@ -40,6 +41,34 @@ body {
 
 .pc-none {
 	display: none;
+}
+
+.d-none {
+	display: none !important;
+}
+
+.bg-red {
+	background-color: #E96B6B;
+}
+
+.bg-yellow {
+	background-color: #F6C94C;
+}
+
+.bg-green {
+	background-color: #A9BF88;
+}
+
+.bg-blue {
+	background-color: #8CAED7;
+}
+
+.bg-main {
+	background-color: #A69AC4;
+}
+
+.bg-transparent {
+	background-color: transparent;
 }
 
 header,
@@ -98,6 +127,11 @@ nav a:focus {
 nav a:active {
 	outline: none;
 	color: #75658F;
+}
+
+#writeDiary {
+	font-size: 20px;
+	box-shadow: 0px 4px 8px #777777aa;
 }
 
 h1 {
@@ -299,6 +333,20 @@ button {
 	transition: background-color 0.2s, transform 0.2s;
 }
 
+button.btn-white {
+	background-color: #fff;
+	color: #332E3B;
+	box-sizing: border-box;
+	border: 1px solid #999;
+}
+
+button.btn-normal {
+	background-color: #fff;
+	color: #332E3B;
+	box-sizing: border-box;
+	border: 1px solid #A69AC4;
+}
+
 button:hover {
 	background-color: #A69AC4;
 	color: #423B4D;
@@ -350,9 +398,353 @@ button:disabled {
 	font-weight: bold;
 }
 
+button#signUpWriteDiary {
+	font-size: 20px;
+}
+
+.popup-mask {
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	overflow: hidden;
+	background-color: #332E3Baa;
+	z-index: 500;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+button.popup-close {
+	position: absolute;
+	top: 5vw;
+	right: 5vw;
+	z-index: 600;
+	padding: 0;
+	width: 40px;
+	height: 40px;
+	font-size: 30px;
+	line-height: 20px;
+	color: #FFF;
+	background-color: #000;
+	opacity: .7;
+	border-radius: 10px;
+}
+
+.diary-img-background {
+	background-image: url("assets/images/blank_diary_full.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 100%;
+	height: 80%;
+	max-width: 1200px;
+	margin: auto;
+	padding: 170px 260px 130px;
+	box-sizing: border-box;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 130;
+}
+
+
+/* popup login ------------------- */
+.diary-img-background>div {
+	width: 46%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.login-container {
+	gap: 5px;
+	align-items: stretch;
+}
+
+.login-hint {
+	width: 100%;
+	font-size: 15px;
+}
+
+.login-hint>span {
+	cursor: pointer;
+}
+
+.login-container>input,
+.login-container>button {
+	flex: 0 0 auto;
+	flex-grow: none;
+}
+
+.login-container>button {
+	margin-top: auto;
+}
+
+/* // end popup login ------------------- */
+/* popup write ----------------------- */
+.write-diary-container {
+	justify-content: space-between;
+}
+
+/* 감정 선택 & 저장 전 일기 전체 내용 보여줄때 사용 */
+div.diary-container-full {
+	width: 100%;
+}
+
+/* 날짜 선택 */
+.select-date {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 10px;
+}
+
+#selectDate {
+	grid-column: span 2;
+	margin-right: 0;
+}
+
+.select-date>p {
+	grid-column: span 2;
+	font-size: 15px;
+	margin-top: 0;
+}
+
+/* 감정 선택 */
+.select-feel {
+	width: 100%;
+}
+
+.select-feels {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	justify-content: space-between;
+	gap: 5px;
+}
+
+.select-feels>li {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	cursor: pointer;
+}
+
+/* 감정 이미지 */
+.select-feels>li>img {
+	width: 85px;
+	filter: grayscale(1);
+	transition: filter .2s linear;
+}
+
+.select-feels>li>img.select-img {
+	filter: grayscale(0);
+}
+
+.select-feels>li:hover>img,
+.select-feels>li:focus>img {
+	filter: grayscale(0);
+}
+
+.select-feels>li:active>img {
+	opacity: 0.8;
+}
+
+/* 감정 문구 */
+.select-feels>li>p {
+	border: 1px solid #999;
+	border-radius: 20px;
+	padding: 2px 12px;
+	font-size: 14px;
+}
+
+/* 일기 제목, 내용 */
+.write-title>label,
+.write-dairy>label {
+	width: 100%;
+	height: 32px;
+	margin-bottom: 10px;
+	display: inline-block;
+	text-align: center;
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.write-title>input {
+	width: 100%;
+}
+
+.write-title>p {
+	font-size: 14px;
+	margin-top: 7px;
+}
+
+.write-dairy {
+	width: 100%;
+	height: 100%;
+	padding: 0 0 10px;
+}
+
+.write-dairy>textarea {
+	width: 100%;
+	height: calc(100% - 42px - 33px);
+	resize: none;
+	box-sizing: border-box;
+	padding: 5px;
+}
+
+#writeTextareaMent {
+	width: 100%;
+	height: 28px;
+	margin: 0;
+	display: flex;
+	justify-content: space-between;
+}
+
+#writeTextareaMent>p {
+	margin: 0;
+}
+
+/* 작성한 일기 확인 */
+.check-write-diary {
+	width: 100%;
+	height: calc(100% - 50px);
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.check-write-diary>p {
+	margin: 0;
+}
+
+#checkDate {
+	width: 100%;
+	font-size: 20px;
+	font-weight: 600;
+	flex: 0;
+}
+
+#checkFeel {
+	width: 60px;
+	height: 60px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	flex: 0;
+}
+
+#checkTitle {
+	width: 100%;
+	font-size: 18px;
+	font-weight: 600;
+	flex: 0;
+}
+
+#checkDiary {
+	width: 100%;
+	min-height: 0;
+	overflow-y: auto;
+	flex: 1;
+	margin-top: 5px;
+	box-sizing: border-box;
+	padding: 0 10px 20px 0;
+	white-space: pre-wrap;
+}
+
+.move-btns {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.move-btns>button {
+	flex: 0 0 auto;
+}
+
+/* // end popup write ----------------------- */
+@media (max-width: 1200px),
+(max-height: 850px) {
+	.popup-mask {
+		background-color: black;
+	}
+
+	.bg-table-tablet {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		background-image: url("assets/images/table.png");
+		background-repeat: no-repeat;
+		background-size: cover;
+		z-index: 120;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+	}
+
+	.diary-img-background {
+		width: 1024px;
+		height: 650px;
+		background-image: url("assets/images/blank_diary.png");
+		background-size: contain;
+		box-sizing: content-box;
+		padding: 0;
+	}
+
+	.diary-img-background>div {
+		width: 50%;
+		height: 100%;
+		box-sizing: border-box;
+		padding: 3% 3% 5% 7%;
+	}
+
+	div.diary-container-full {
+		width: 100%;
+		padding: 3% 7% 5%;
+	}
+}
+
+
 @media (max-width: 1000px) {
 	.step-list {
 		gap: 30px;
+	}
+
+	button.popup-close {
+		top: 10px;
+		right: 3vw;
+		width: 36px;
+		min-height: 36px;
+		height: 36px;
+		font-size: 26px;
+		line-height: 12px;
+	}
+
+	.diary-img-background {
+		width: 100%;
+		height: 100%;
+		background-size: cover;
+		background-position: 5% 0;
+	}
+
+	.diary-img-background>div {
+		width: 100%;
+		height: 100%;
+		box-sizing: border-box;
+		padding: 50px 3% 50px 7%;
+	}
+
+	.move-btns {
+		gap: 10px;
+	}
+
+	.move-btns>button {
+		flex: 1;
 	}
 }
 
@@ -519,6 +911,11 @@ button:disabled {
 	.step-list>li {
 		width: 100%;
 		max-width: 180px;
+	}
+
+	.select-feels {
+		flex-wrap: wrap;
+		justify-content: center;
 	}
 
 }
