@@ -1,0 +1,658 @@
+#writeDiary {
+	font-size: 20px;
+	box-shadow: 0px 4px 8px #777777aa;
+}
+
+#about img {
+	display: block;
+	width: 100%;
+	max-width: 800px;
+	height: auto;
+	margin: 20px auto;
+	border-radius: 2px;
+}
+
+.feature-tabs {
+	display: inline-block;
+	width: 100%;
+	height: 60px;
+	background: #F0EBF5;
+	border-radius: 20px 20px 0 0;
+	border: 2px solid #A69AC4;
+	border-bottom: none;
+	display: flex;
+	align-items: center;
+	transform: translateY(10px);
+	position: relative;
+	z-index: 1;
+}
+
+.feature-tabs>button {
+	height: 100%;
+	border-radius: 20px 20px 0 0;
+	background: #F0EBF5;
+	color: #332E3B;
+}
+
+.feature-tabs>button.active {
+	background: #A69AC4;
+	transform: scaleY(1.2) translateY(-4px);
+}
+
+.feature-tabs>button:not(.active):hover {
+	transform: scaleY(1.2) translateY(-4px);
+}
+
+.feature-cards {
+	width: 100%;
+	height: 400px;
+}
+
+.feature-card {
+	width: 100%;
+	height: 100%;
+	padding: 20px 24px;
+	border: 2px solid #A69AC4;
+	border-radius: 0 0 2px 2px;
+	background-color: #F0EBF5;
+	display: grid;
+	grid-template-columns: 5fr 5fr;
+	grid-template-rows: 1fr 9fr;
+	gap: 0 16px;
+	align-items: center;
+	display: none;
+	z-index: 5;
+	position: relative;
+}
+
+.feature-card.active {
+	display: grid;
+}
+
+.feature-card>img {
+	grid-column: 1;
+	grid-row: 1 / 3;
+	max-width: 100%;
+	height: auto;
+}
+
+.feature-card>h3 {
+	grid-column: 2;
+	grid-row: 1;
+	width: 100%;
+}
+
+.feature-card>p {
+	font-weight: 500;
+	grid-column: 2;
+	grid-row: 2;
+	align-self: stretch;
+	margin: 0;
+}
+
+.step-list {
+	display: flex;
+	justify-content: space-around;
+	list-style: none;
+	padding: 0;
+	gap: 10px;
+}
+
+.step-list>li {
+	width: 25%;
+	max-width: 200px;
+	aspect-ratio: 1 / 1;
+	padding: 15px;
+	border-radius: 100%;
+	text-align: center;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	position: relative;
+}
+
+.step-list>li:nth-child(1) {
+	background-color: #A69AC4;
+}
+
+.step-list>li:nth-child(2) {
+	background-color: #F6C94C;
+}
+
+.step-list>li:nth-child(3) {
+	background-color: #8CAED7;
+}
+
+.step-list>li:nth-child(4) {
+	background-color: #A9BF88;
+}
+
+.step-list>li>i {
+	font-size: 28px;
+	display: block;
+}
+
+.signup {
+	padding: 24px;
+	margin-bottom: 50px;
+	background-color: #F0EBF5;
+	border: 1px solid #A69AC4;
+	border-radius: 8px;
+}
+
+.subscribe {
+	width: 100%;
+}
+
+.subscribe>input {
+	width: 16px;
+	height: 16px;
+}
+
+#formMessage {
+	min-height: 27px;
+	transition: all .1s;
+	font-size: 17px;
+}
+
+button#signUpWriteDiary {
+	font-size: 20px;
+}
+
+.popup-mask {
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	overflow: hidden;
+	background-color: #332E3Baa;
+	z-index: 500;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+button.popup-close {
+	position: absolute;
+	top: 5vw;
+	right: 5vw;
+	z-index: 600;
+	padding: 0;
+	width: 40px;
+	height: 40px;
+	font-size: 30px;
+	line-height: 20px;
+	color: #FFF;
+	background-color: #000;
+	opacity: .7;
+	border-radius: 10px;
+}
+
+.diary-img-background {
+	background-image: url("../assets/images/blank_diary_full.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 100%;
+	height: 80%;
+	max-width: 1200px;
+	margin: auto;
+	padding: 170px 260px 130px;
+	box-sizing: border-box;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 130;
+}
+
+
+/* popup login ------------------- */
+.diary-img-background>div {
+	width: 46%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.login-container {
+	gap: 5px;
+	align-items: stretch;
+}
+
+.login-hint {
+	width: 100%;
+	font-size: 15px;
+}
+
+.login-hint>span {
+	cursor: pointer;
+}
+
+.login-container>input,
+.login-container>button {
+	flex: 0 0 auto;
+	flex-grow: none;
+}
+
+.login-container>button {
+	margin-top: auto;
+}
+
+/* // end popup login ------------------- */
+/* popup write ----------------------- */
+.write-diary-container {
+	justify-content: space-between;
+}
+
+/* 감정 선택 & 저장 전 일기 전체 내용 보여줄때 사용 */
+div.diary-container-full {
+	width: 100%;
+}
+
+/* 날짜 선택 */
+.select-date {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 10px;
+}
+
+#selectDate {
+	grid-column: span 2;
+	margin-right: 0;
+}
+
+.select-date>p {
+	grid-column: span 2;
+	font-size: 15px;
+	margin-top: 0;
+}
+
+/* 감정 선택 */
+.select-feel {
+	width: 100%;
+}
+
+.select-feels {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	justify-content: space-between;
+	gap: 5px;
+}
+
+.select-feels>li {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	cursor: pointer;
+}
+
+/* 감정 이미지 */
+.select-feels>li>img {
+	width: 85px;
+	filter: grayscale(1);
+	transition: filter .2s linear;
+}
+
+.select-feels>li>img.select-img {
+	filter: grayscale(0);
+}
+
+.select-feels>li:hover>img,
+.select-feels>li:focus>img {
+	filter: grayscale(0);
+}
+
+.select-feels>li:active>img {
+	opacity: 0.8;
+}
+
+/* 감정 문구 */
+.select-feels>li>p {
+	border: 1px solid #999;
+	border-radius: 20px;
+	padding: 2px 12px;
+	font-size: 14px;
+}
+
+/* 일기 제목, 내용 */
+.write-title>label,
+.write-dairy>label {
+	width: 100%;
+	height: 32px;
+	margin-bottom: 10px;
+	display: inline-block;
+	text-align: center;
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.write-title>input {
+	width: 100%;
+}
+
+.write-title>p {
+	font-size: 14px;
+	margin-top: 7px;
+}
+
+.write-dairy {
+	width: 100%;
+	height: 100%;
+	padding: 0 0 10px;
+}
+
+.write-dairy>textarea {
+	width: 100%;
+	height: calc(100% - 42px - 33px);
+	resize: none;
+	box-sizing: border-box;
+	padding: 5px;
+}
+
+#writeTextareaMent {
+	width: 100%;
+	height: 28px;
+	margin: 0;
+	display: flex;
+	justify-content: space-between;
+}
+
+#writeTextareaMent>p {
+	margin: 0;
+}
+
+/* 작성한 일기 확인 */
+.check-write-diary {
+	width: 100%;
+	height: calc(100% - 50px);
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.check-write-diary>p {
+	margin: 0;
+}
+
+#checkDate {
+	width: 100%;
+	font-size: 20px;
+	font-weight: 600;
+	flex: 0;
+}
+
+#checkFeel {
+	width: 60px;
+	height: 60px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	flex: 0;
+}
+
+#checkTitle {
+	width: 100%;
+	font-size: 18px;
+	font-weight: 600;
+	flex: 0;
+}
+
+#checkDiary {
+	width: 100%;
+	min-height: 0;
+	overflow-y: auto;
+	flex: 1;
+	margin-top: 5px;
+	box-sizing: border-box;
+	padding: 0 10px 20px 0;
+	white-space: pre-wrap;
+}
+
+.move-btns {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.move-btns>button {
+	flex: 0 0 auto;
+}
+
+/* // end popup write ----------------------- */
+@media (max-width: 1200px),
+(max-height: 850px) {
+	.popup-mask {
+		background-color: black;
+	}
+
+	.bg-table-tablet {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		background-image: url("../assets/images/table.png");
+		background-repeat: no-repeat;
+		background-size: cover;
+		z-index: 120;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+	}
+
+	.diary-img-background {
+		width: 1024px;
+		height: 650px;
+		background-image: url("../assets/images/blank_diary.png");
+		background-size: contain;
+		box-sizing: content-box;
+		padding: 0;
+	}
+
+	.diary-img-background>div {
+		width: 50%;
+		height: 100%;
+		box-sizing: border-box;
+		padding: 3% 3% 5% 7%;
+	}
+
+	div.diary-container-full {
+		width: 100%;
+		padding: 3% 7% 5%;
+	}
+}
+
+
+@media (max-width: 1000px) {
+	.step-list {
+		gap: 30px;
+	}
+
+	button.popup-close {
+		top: 10px;
+		right: 3vw;
+		width: 36px;
+		min-height: 36px;
+		height: 36px;
+		font-size: 26px;
+		line-height: 12px;
+	}
+
+	.diary-img-background {
+		width: 100%;
+		height: 100%;
+		background-size: cover;
+		background-position: 5% 0;
+	}
+
+	.diary-img-background>div {
+		width: 100%;
+		height: 100%;
+		box-sizing: border-box;
+		padding: 50px 3% 50px 7%;
+	}
+
+	.move-btns {
+		gap: 10px;
+	}
+
+	.move-btns>button {
+		flex: 1;
+	}
+}
+
+/* tablet size */
+@media (max-width: 800px) {
+	#about img {
+		height: 360px;
+		object-fit: cover;
+		object-position: center 7%;
+	}
+
+	.feature-cards {
+		height: 500px;
+	}
+
+	.feature-card {
+		padding: 16px 20px 20px;
+		grid-template-columns: 1fr;
+		grid-template-rows: 1fr 1fr 1fr auto 1fr;
+		align-items: start;
+	}
+
+	.feature-card>img {
+		grid-column: 1;
+		grid-row: 1 / 4;
+		max-height: 290px;
+		margin: 0 auto 0;
+	}
+
+	.feature-card>h3 {
+		grid-column: 1;
+		grid-row: 4;
+	}
+
+	.feature-card>p {
+		grid-column: 1;
+		grid-row: 5;
+	}
+
+	.step-list {
+		margin-bottom: 80px;
+	}
+
+	.step-list>li {
+		max-width: 150px;
+	}
+}
+
+/* mobile size */
+@media (max-width: 768px) {
+	.feature-cards {
+		grid-template-columns: 1fr;
+		gap: 10px;
+	}
+
+	.step-list {
+		gap: 20px;
+	}
+
+	.signup {
+		padding: 12px 24px 40px;
+	}
+}
+
+
+@media (max-width: 600px) {
+	#about img {
+		height: auto;
+		object-fit: contain;
+	}
+
+	.feature-tabs {
+		height: 52px;
+		transform: translateY(12px);
+	}
+
+	.feature-tabs>button {
+		height: 50px;
+		font-size: 16px;
+		padding: 4px;
+	}
+
+	.feature-card {
+		grid-template-rows: 2fr auto 3fr;
+	}
+
+	.feature-card>img {
+		grid-row: 1;
+		max-height: auto;
+	}
+
+	.feature-card>h3 {
+		grid-row: 2;
+	}
+
+	.feature-card>p {
+		grid-row: 3;
+	}
+
+	.step-list {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		justify-items: center;
+		gap: 15px;
+		margin: 30px auto 80px;
+	}
+
+	.step-list>li {
+		width: 100%;
+		max-width: 180px;
+	}
+
+	.select-feels {
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
+}
+
+@media (max-width: 390px) {
+	.feature-card {
+		padding: 10px 16px;
+	}
+
+	.step-list {
+		gap: 5px;
+	}
+
+	.step-list>li:nth-child(n+1) {
+		width: 100%;
+		max-width: 150px;
+		aspect-ratio: 1 / 1.08;
+		border-radius: 24px;
+		border: 4px solid #F0EBF5;
+	}
+
+	.step-list>li>i {
+		font-size: 20px;
+	}
+
+	.signup {
+		padding: 8px 16px 30px;
+	}
+
+}
+
+@media (max-width: 280px) {
+	.step-list {
+		grid-template-columns: repeat(1, 1fr);
+	}
+}
