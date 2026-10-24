@@ -413,6 +413,7 @@ td>img {
 
 	.setting {
 		overflow-y: unset;
+		max-height: fit-content;
 	}
 
 	.scroll-y {
