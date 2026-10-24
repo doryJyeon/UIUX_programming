@@ -319,7 +319,8 @@ div.diary-container-full {
 	border: 1px solid #999;
 	border-radius: 20px;
 	padding: 2px 12px;
-	font-size: 14px;
+	font-size: 16px;
+	color: inherit;
 }
 
 /* 일기 제목, 내용 */
