@@ -1,4 +1,5 @@
-#writeDiary {
+#writeDiary,
+#btnMypage {
 	font-size: 20px;
 	box-shadow: 0px 4px 8px #777777aa;
 }
@@ -555,6 +556,12 @@ div.diary-container-full {
 
 /* mobile size */
 @media (max-width: 768px) {
+
+	#writeDiary,
+	#btnMypage {
+		font-size: 18px;
+	}
+
 	.feature-cards {
 		grid-template-columns: 1fr;
 		gap: 10px;
@@ -625,6 +632,12 @@ div.diary-container-full {
 }
 
 @media (max-width: 390px) {
+
+	#writeDiary,
+	#btnMypage {
+		font-size: 16px;
+	}
+
 	.feature-card {
 		padding: 10px 16px;
 	}

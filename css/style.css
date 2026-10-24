@@ -71,6 +71,10 @@ body {
 	background-color: transparent;
 }
 
+.bold {
+	font-weight: 600 !important;
+}
+
 header,
 main,
 footer {
@@ -105,7 +109,7 @@ nav {
 	margin-top: 24px;
 }
 
-nav a {
+a {
 	color: #75658F;
 	font-weight: bold;
 	letter-spacing: 1px;
@@ -113,20 +117,21 @@ nav a {
 	transition: color 0.2s, transform 0.2s;
 }
 
-nav a:hover {
+a:hover {
 	color: #A69AC4;
 	transform: translateY(-5px);
 }
 
-nav a:focus {
+a:focus {
 	outline: 2px solid #A9BF88;
 	outline-offset: 2px;
 	transform: translateY(-5px);
 }
 
-nav a:active {
+a:active {
 	outline: none;
 	color: #75658F;
+	opacity: 0.7;
 }
 
 h1 {
@@ -141,6 +146,9 @@ h2 {
 	font-size: 28px;
 	font-weight: 800;
 	line-height: 1.4;
+	height: 40px;
+	margin-top: 24px;
+	margin-bottom: 24px;
 }
 
 h3 {
@@ -164,12 +172,17 @@ form {
 }
 
 input,
-button {
+button,
+.btn {
 	font: inherit;
 }
 
-input:not([type="checkbox"]) {
-	flex: 1;
+.btn {
+	display: inline-block;
+	text-align: center;
+}
+
+input:not([type="checkbox"]):not([type="radio"]) {
 	min-width: 100px;
 	padding: 5px 12px;
 	border: 1px solid #A69AC4;
@@ -177,7 +190,8 @@ input:not([type="checkbox"]) {
 	margin-right: 10px;
 }
 
-button {
+button,
+.btn {
 	flex: 1;
 	padding: 6px 18px;
 	background-color: #75658F;
@@ -188,26 +202,38 @@ button {
 	transition: background-color 0.2s, transform 0.2s;
 }
 
-button.btn-white {
+button.btn-white,
+.btn-white {
+	background-color: #fff;
+	color: #75658F;
+	box-sizing: border-box;
+	border: 1px solid #A69AC4;
+}
+
+button.btn-gray,
+.btn-gray {
 	background-color: #fff;
 	color: #332E3B;
 	box-sizing: border-box;
 	border: 1px solid #999;
 }
 
-button.btn-normal {
+button.btn-normal,
+.btn-normal {
 	background-color: #fff;
 	color: #332E3B;
 	box-sizing: border-box;
 	border: 1px solid #A69AC4;
 }
 
-button:hover {
+button:hover,
+.btn:hover {
 	background-color: #A69AC4;
 	color: #423B4D;
 }
 
-button:focus {
+button:focus,
+.btn:focus {
 	outline: 2px solid #A9BF88;
 }
 
@@ -216,7 +242,8 @@ input:focus {
 	outline-offset: 2px;
 }
 
-button:active {
+button:active,
+.btn:active {
 	outline: none;
 	background-color: #75658F;
 	transform: scale(1.05);
@@ -290,17 +317,31 @@ button:disabled {
 	}
 
 	input,
-	button {
+	button,
+	.btn {
 		width: 100%;
 	}
 
-	button {
+	button,
+	.btn {
 		min-height: 40px;
+	}
+
+	.mobile-full {
+		width: auto;
 	}
 }
 
 @media (max-width: 390px) {
 	.pc-none {
 		display: inline-block;
+	}
+
+	.btn {
+		margin-top: 15px;
+	}
+
+	.mobile-full {
+		width: 100%;
 	}
 }

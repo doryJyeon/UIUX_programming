@@ -1,0 +1,367 @@
+/*
+	사용하는 색상 정리
+
+	main color(purple)
+	#A69AC4
+	light color
+	#F0EBF5
+	deep color
+	#75658F
+	dark (font)
+	#423B4D
+	cream color(body background)
+	#FDFAF6
+	yellow
+	#F6C94C
+	red
+	#E96B6B
+	blue
+	#8CAED7
+	green
+	#A9BF88
+*/
+
+body,
+html {
+	overflow: none;
+}
+
+header {
+	height: 80px;
+	padding: 15px 3%;
+}
+
+nav.header-nav {
+	width: 100%;
+	height: 50px;
+	margin: 0;
+}
+
+nav.header-nav>a {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	font-size: 20px;
+}
+
+nav.header-nav>a>img {
+	height: 40px;
+}
+
+footer {
+	height: 70px;
+	padding-top: 10px;
+	padding-bottom: 20px;
+}
+
+main {
+	width: 100vw;
+	height: calc(100vh - 80px - 70px);
+	overflow-y: hidden;
+	padding: 0 3%;
+	display: grid;
+	gap: 30px;
+	grid-template-columns: 3fr 2fr;
+}
+
+section {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	overflow-y: hidden;
+
+}
+
+.diary-left {
+	width: 100%;
+	height: calc(100% - 88px);
+	padding-bottom: 20px;
+	overflow-y: hidden;
+	display: inline-block;
+	background-color: #F6C94C33;
+	border-radius: 8px;
+}
+
+.diary-list-table {
+	width: 100%;
+	height: 100%;
+	margin-top: 20px;
+	padding-bottom: 20px;
+	overflow-y: scroll;
+}
+
+/* 스크롤 바 */
+.diary-list-table::-webkit-scrollbar,
+.scroll-y::-webkit-scrollbar {
+	width: 8px;
+}
+
+.diary-list-table::-webkit-scrollbar-track,
+.scroll-y::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.diary-list-table::-webkit-scrollbar-thumb {
+	background: #A9BF88;
+	border-radius: 10px;
+}
+
+.scroll-y::-webkit-scrollbar-thumb {
+	background: #F6C94C;
+	border-radius: 10px;
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+	position: relative;
+}
+
+thead {
+	position: sticky;
+}
+
+.col-1 {
+	width: 20%;
+}
+
+.col-3 {
+	width: 20%;
+}
+
+th {
+	border-bottom: 2px solid #423B4D88;
+	font-size: 18px;
+}
+
+td {
+	height: 36px;
+	border-bottom: 1px solid #423B4D88;
+	padding: 8px 0;
+}
+
+td:not(:nth-of-type(2)) {
+	text-align: center;
+}
+
+td>a {
+	color: #423B4D;
+}
+
+td>a:hover {
+	color: #A9BF88;
+}
+
+td>img {
+	height: 36px;
+}
+
+
+.setting {
+	height: 100%;
+	overflow-y: hidden;
+}
+
+.ai-container {
+	border: 1px solid #423B4D;
+	width: 100%;
+	max-height: calc(100% - 88px);
+	box-sizing: border-box;
+	border-radius: 8px;
+	padding: 20px 3%;
+	display: flex;
+	gap: 16px;
+	flex-direction: column;
+}
+
+.scroll-y {
+	overflow-y: auto;
+}
+
+.ai-set-main {
+	width: 100%;
+	display: flex;
+	gap: 10px;
+}
+
+.ai-set-main>i {
+	width: 60px;
+	height: 60px;
+	border-radius: 6px;
+	text-align: center;
+	line-height: 55px;
+	font-size: 28px;
+	background-color: #DEECC8;
+	border: 1px solid #7E9757;
+	color: #7E9757;
+}
+
+.ai-container .ai-set-main:first-child>i {
+	line-height: 60px;
+	background-color: #F0EBF5;
+	border: 1px solid #75658F;
+	color: #75658F;
+}
+
+.ai-container .ai-set-main:last-child>i {
+	background-color: #D9E7F8;
+	border: 1px solid #29568C;
+	color: #29568C;
+}
+
+.ai-set-main>div>* {
+	margin: 0;
+}
+
+.ai-set-main>div>b {
+	font-weight: 600;
+	font-size: 18px;
+	color: #423B4D;
+}
+
+/* AI 스타일 설정 */
+.ai-set-container {
+	flex-wrap: wrap;
+	height: 100%;
+	overflow-y: auto;
+	padding-bottom: 30px;
+}
+
+.ai-set-container>div:first-of-type {
+	align-self: center;
+}
+
+.ai-set-container>div:first-of-type>b {
+	font-size: 24px;
+}
+
+.ai-set-items {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 15px 10px;
+	margin-top: 20px;
+}
+
+.ai-set-items input[type="radio"] {
+	width: 1rem;
+	height: 1rem;
+	margin-left: 0.5rem;
+	margin-right: 0;
+}
+
+.ai-set-items>label {
+	font-size: 18px;
+}
+
+.ai-set-items>label>b {
+	font-size: 20px;
+	color: #423B4D;
+}
+
+.ai-set-items>label>p {
+	margin: 0 0 0 2rem;
+	font-size: 18px;
+}
+
+.light-font {
+	color: gray;
+	font-size: 15px !important;
+}
+
+.prev-next-buttons {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.prev-next-buttons>button {
+	flex: 0;
+}
+
+#nextBtn {
+	margin-left: auto;
+}
+
+@media (max-width: 1000px) {
+	.ai-set-main>i {
+		width: 50px;
+		height: 50px;
+		line-height: 45px;
+		font-size: 26px;
+	}
+
+	.ai-container .ai-set-main:first-child>i {
+		line-height: 50px;
+	}
+}
+
+@media (max-width: 900px) {
+	h2 {
+		margin-top: 10px;
+	}
+
+	main {
+		height: auto;
+		display: flex;
+		gap: 20px;
+		flex-direction: column;
+		overflow-y: auto;
+	}
+
+	section {
+		max-height: 75vh;
+	}
+
+	main>section:first-of-type {
+		overflow-y: hidden;
+	}
+
+	.setting {
+		overflow-y: unset;
+	}
+
+	.scroll-y {
+		overflow-y: unset;
+	}
+
+	.ai-container {
+		max-height: unset;
+	}
+}
+
+/* tablet size */
+@media (max-width: 768px) {
+	td {
+		padding: 2px 5px;
+	}
+
+	.ai-set-main>i {
+		width: 40px;
+		height: 40px;
+		line-height: 35px;
+		font-size: 24px;
+	}
+
+	.ai-container .ai-set-main:first-child>i {
+		line-height: 40px;
+	}
+
+	.ai-set-container>div:first-of-type>b {
+		font-size: 22px;
+	}
+
+	.ai-set-items>label>b {
+		font-size: 18px;
+	}
+
+	.ai-set-items>label>p {
+		font-size: 16px;
+	}
+}
+
+/* mobile size */
+@media (max-width: 390px) {}
+
+@media (max-width: 280px) {}
