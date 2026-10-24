@@ -29,9 +29,9 @@
 
 	<main>
 		<section class="diary-list-container">
-			<h2>일기 목록</h2>
+			<h2>작성한 일기</h2>
 
-			<div class="diary-left">
+			<div class="diary-left" id="diaryList">
 				<div class="diary-list-table">
 					<table class="diary-list">
 						<colgroup>
@@ -46,7 +46,7 @@
 								<th>감정</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id="diaryContents">
 							<tr>
 								<td>2026.10.24</td>
 								<td><a href="#">일기 제목 부분입니다.</a></td>
@@ -54,6 +54,18 @@
 							</tr>
 						</tbody>
 					</table>
+				</div>
+			</div>
+
+			<div class="d-none" id="diaryContent">
+				<button class="close-diary" onclick="hideDiaryContent()"><i class="bi bi-x-square"></i></button>
+				<div class="diary-date-face">
+					<h4 class="diary-date">2026.10.25</h4>
+					<img class="diary-face" src="assets/images/emoji/face_good.png" alt="">
+				</div>
+				<h3 class="diary-title">제목</h3>
+				<div class="diary-content">
+					내용
 				</div>
 			</div>
 		</section>
