@@ -195,6 +195,7 @@ td>img {
 	background-color: #DEECC8;
 	border: 1px solid #7E9757;
 	color: #7E9757;
+	flex-shrink: 0;
 }
 
 .ai-container .ai-set-main:first-child>i {
@@ -204,7 +205,7 @@ td>img {
 	color: #75658F;
 }
 
-.ai-container .ai-set-main:last-child>i {
+.ai-container .ai-set-main:nth-child(3n)>i {
 	background-color: #D9E7F8;
 	border: 1px solid #29568C;
 	color: #29568C;
