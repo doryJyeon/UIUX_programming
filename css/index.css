@@ -154,9 +154,10 @@
 }
 
 #formMessage {
-	min-height: 27px;
+	height: fit-content;
 	transition: all .1s;
 	font-size: 17px;
+	margin-bottom: 10px;
 }
 
 button#signUpWriteDiary {
@@ -166,6 +167,7 @@ button#signUpWriteDiary {
 .popup-mask {
 	width: 100vw;
 	height: 100vh;
+	height: 100dvh;
 	position: fixed;
 	overflow: hidden;
 	background-color: #332E3Baa;

@@ -74,25 +74,26 @@ function handleSignup(event) {
     const hasSubscribed = subscribed ? "(서비스 수신 동의)" : "(서비스 수신 미동의)";
 
     // 빈 값 확인
-    if (!email.value) return changeMessage("이메일을 입력해주세요.", "c-danger", email);
-    if (!password.value) return changeMessage("비밀번호를 입력해주세요.", "c-danger", password);
+    if (!email.value) return changeMessage("이메일을 입력해주세요.", "c-danger", true, email);
+    if (!password.value) return changeMessage("비밀번호를 입력해주세요.", "c-danger", true, password);
 
     // 비밀번호 유효성 검사
     if (!passwordRegex.test(password.value)) {
-        return changeMessage("비밀번호는 영어+숫자+특수문자(! @ # $ % ^ & *) 조합으로 8자 이상 입력해주세요.", "c-danger", password);
+        return changeMessage("비밀번호는 영어+숫자+특수문자(! @ # $ % ^ & *) 조합으로 8자 이상 입력해주세요.", "c-danger", true, password);
     }
 
     signupButton.textContent = "가입완료";
     signupButton.disabled = true;
 
-    changeMessage("회원 가입이 완료되었습니다!" + hasSubscribed, "c-success");
+    changeMessage("회원 가입이 완료되었습니다!" + hasSubscribed, "c-success", true);
     signUpWriteDiary.classList.remove("d-none");
 }
 
 // 회원가입 메시지 변경
-function changeMessage(message, type, moveFocus = false) {
+function changeMessage(message, type, alertMsg = false, moveFocus = false) {
     formMessage.textContent = message;
     formMessage.className = type;
+    if (alertMsg) alert(message);
     if (moveFocus) moveFocus.focus();
 }
 
@@ -113,7 +114,7 @@ signupForm.addEventListener("input", (e) => {
         if (e.target.value.length > 50) {
             changeMessage("50자 미만의 이메일을 사용해주세요.", "c-danger");
         } else {
-            changeMessage("", "");
+            changeMessage("수신 가능한 이메일을 사용해주세요.", "");
         }
     }
     // password
@@ -122,6 +123,7 @@ signupForm.addEventListener("input", (e) => {
         if (!passwordRegex.test(password.value)) {
             return changeMessage("비밀번호는 영어+숫자+특수문자(! @ # $ % ^ & *) 조합으로 8자 이상 입력해주세요.", "c-danger");
         } else {
+
             return changeMessage("", "");
         }
     }
@@ -244,6 +246,7 @@ function saveDiary() {
 // 일기 작성 화면(=다음 클릭 이동)
 function showWriteDiarys(index) {
     const writeDiaryPopupItem = writeDiaryPopup.querySelectorAll(":scope > div");
+    const thisWriteValue = writeDiaryPopupItem[index].querySelector('input')?.value;
     const lastItem = writeDiaryPopupItem.length - 1;
 
     writeDiaryPopupItem.forEach((item, idx) => {
@@ -262,7 +265,8 @@ function showWriteDiarys(index) {
     }
 
     // nextBtn은 각 항목 event 감지 후 disabled 변경됨
-    nextBtn.disabled = true;
+    // 이전 값 있으면 disabled 해제
+    nextBtn.disabled = thisWriteValue ? false : true;
 
     switch (index) {
         case 0:

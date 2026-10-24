@@ -56,7 +56,7 @@ footer {
 
 main {
 	width: 100vw;
-	height: calc(100vh - 80px - 70px);
+	height: calc(100dvh - 80px - 70px);
 	overflow-y: hidden;
 	padding: 0 3%;
 	display: grid;
@@ -389,11 +389,11 @@ td>img {
 	}
 
 	section {
-		max-height: 75vh;
+		max-height: 75dvh;
 	}
 
 	main>section:first-of-type {
-		height: calc(75vh - 74px);
+		height: calc(75dvh - 74px);
 		overflow-y: hidden;
 	}
 
