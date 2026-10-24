@@ -641,6 +641,10 @@ div.diary-container-full {
 		font-size: 16px;
 	}
 
+	#btnMypage {
+		margin-top: 10px;
+	}
+
 	.feature-card {
 		padding: 10px 16px;
 	}
