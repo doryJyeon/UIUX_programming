@@ -152,6 +152,9 @@ function openPopup(localtion = false) {
     // 로그인 확인 후 이동
     const isLogin = checkLoginCookie();
     if (isLogin) {
+        // 로그인 화면 hide
+        loginContainer.classList.add("d-none");
+        writeDiaryPopup.classList.remove("d-none");
         // 일기 작성 팝업
         showWriteDiarys(0);
     } else {
