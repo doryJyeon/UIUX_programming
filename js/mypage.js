@@ -106,7 +106,7 @@ function saveAiSet() {
     aiLength.textContent = aiStyles["length"][checkedLength];
 
     hideAiSetting();
-    alert("변경되었습니다.");
+    alert("AI 피드백 스타일이 변경되었습니다.");
 }
 
 // AI 피드백 설정 페이지 이동
