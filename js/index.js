@@ -40,6 +40,8 @@ const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
 
 // 회원 가입 시 서비스 수신 동의
 let subscribed = false;
+// 로그인 후 이동할 페이지 구분
+let moveLoginAfter = false;
 
 // 날짜 생성
 function getDate(day = 0) {
@@ -57,6 +59,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // 일기 작성 팝업 오늘 이후 날짜 막기
     selectDate.max = getDate();
 });
+
+// 로그인 확인
+function checkLoginCookie() {
+    return document.cookie.split("; ").some(cookie => cookie.startsWith("login="));
+}
 
 // 회원 가입
 function handleSignup(event) {
@@ -136,12 +143,22 @@ function showFeature(target, el) {
 }
 
 // 일기 작성 popup =====================
-// 팝업 열기
-function openPopup() {
+// 팝업 열기(일기 작성 클릭 시)
+function openPopup(localtion = false) {
+    // 일기 작성 시 로그인 후 이동 X
+    moveLoginAfter = localtion;
     popupEl.classList.remove("d-none");
     document.body.style.overflow = "hidden";
-    // 로그인 흔적 확인(일기 작성 흔적이 있다면 로그인한것으로 간주함)
-    if (!loginContainer.classList.contains("d-none")) alert("회원가입 기능은 아직 구현되지 않았습니다.\n상단의 계정 정보를 이용해 로그인해 주세요.");
+    // 로그인 확인 후 이동
+    const isLogin = checkLoginCookie();
+    if (isLogin) {
+        // 일기 작성 팝업
+        showWriteDiarys(0);
+    } else {
+        // 로그인 팝업
+        alert("회원가입 기능은 아직 구현되지 않았습니다.\n상단 계정 정보를 이용해 로그인해주세요.")
+        showLoginPopup();
+    }
 }
 
 // 팝업 닫기
@@ -183,10 +200,18 @@ function loginCopy(type) {
 // 로그인
 function checkLogin() {
     if (loginEmail.value === testEmail && loginPassword.value === testPassword) {
-        alert("로그인 성공\n날짜 선택화면으로 넘어갑니다.");
-        loginContainer.classList.add("d-none");
-        writeDiaryPopup.classList.remove("d-none")
-        return showWriteDiarys(0);
+        // 7일동안 유지되는 로그인 쿠키 발행
+        document.cookie = "login=true; max-age=604800; path=/; SameSite=Lax;";
+        if (moveLoginAfter === false) {
+            // 일기 작성 팝업 show
+            loginContainer.classList.add("d-none");
+            writeDiaryPopup.classList.remove("d-none");
+            alert("로그인 성공\n날짜 선택화면으로 넘어갑니다.");
+            return showWriteDiarys(0);
+        } else {
+            // 마이페이지 이동
+            return location.href = moveLoginAfter;
+        }
     } else {
         return alert("아이디 또는 비밀번호가 올바르지 않습니다.");
     }
@@ -341,4 +366,18 @@ function getWriteData() {
     checkDiary.textContent = writeDiaryTextarea.value;
     checkFeel.src = `assets/images/emoji/face_${selectFeel.value}.png`;
     checkFeel.alt = `${selectFeel.value} face`;
+}
+
+// 일기 작성 popup ===================== end
+
+// 마이페이지 이동 시 로그인 체크
+function moveMyPage() {
+    const login = checkLoginCookie();
+
+    if (login) {
+        location.href = "my_page.html";
+    } else {
+        alert("로그인 시 이용 가능합니다.");
+        openPopup("my_page.html");
+    }
 }
