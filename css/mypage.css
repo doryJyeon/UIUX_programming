@@ -238,6 +238,7 @@ td>img {
 }
 
 .ai-container {
+	background-color: #fff;
 	border: 1px solid #423B4D;
 	width: 100%;
 	max-height: calc(100% - 88px);
