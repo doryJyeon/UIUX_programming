@@ -228,6 +228,7 @@ td>img {
 	width: 100%;
 	height: calc(100% - 20px - 60px - 52px);
 	overflow-y: auto;
+	white-space: pre-wrap;
 }
 
 /* AI 피드백 설정 -------------------- */

@@ -251,7 +251,6 @@ writeDiaryPopup.addEventListener("submit", saveDiary);
 function saveDiary(event) {
     event.preventDefault();
     if (confirm("작성한 일기를 저장하시겠습니까?")) {
-
         if (!selectDate.value) {
             showWriteDiarys(0);
             return alert("날짜를 선택해주세요.");
@@ -268,8 +267,21 @@ function saveDiary(event) {
             showWriteDiarys(3);
             return alert("일기 내용을 입력해주세요.");
         }
-        closePopup();
 
+        // 기존 일기 불러오기
+        const existingDiaries = JSON.parse(localStorage.getItem("diaries")) || {};
+
+        // 새로운 일기 추가
+        existingDiaries[selectDate.value] = {
+            feel: selectFeel.value,
+            title: writeTitle.value,
+            content: writeDiaryTextarea.value
+        };
+
+        // localStorage에 저장
+        localStorage.setItem("diaries", JSON.stringify(existingDiaries));
+
+        alert("작성한 일기가 저장되었습니다.\n마이페이지로 이동합니다.");
         // 일기 작성 성공 시 마이페이지로 이동
         location.href = "my_page.html";
     }
@@ -404,15 +416,15 @@ useTitleDate.addEventListener("change", () => {
 // 제목 입력
 writeTitle.addEventListener("input", () => {
     writeTitleCount.textContent = `${writeTitle.value.length}/50자`;
-    if (writeTitle.value.length >= 3 && writeTitle.value.length <= 100) {
+    if (writeTitle.value.length >= 2 && writeTitle.value.length <= 50) {
         writeTitleError.textContent = "";
         writeTitle.removeAttribute("aria-invalid");
         writeTitle.classList.remove("border-danger");
         nextBtn.disabled = false;
     } else {
         nextBtn.disabled = true;
-        if (writeTitle.value.length < 3) {
-            writeTitleError.textContent = "제목은 3글자 이상 입력해주세요.";
+        if (writeTitle.value.length < 2) {
+            writeTitleError.textContent = "제목은 2글자 이상 입력해주세요.";
         } else if (writeTitle.value.length > 50) {
             writeTitleError.textContent = "제목은 50글자 이하로 입력할 수 있습니다.";
         }
