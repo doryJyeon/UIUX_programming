@@ -112,7 +112,7 @@
 				수신 가능한 이메일을 사용해주세요.<br>수신 불가 이메일 사용 시 비밀번호를 찾을 수 없습니다.
 			</p>
 
-			<form action="" method="">
+			<form action="" method="" class="signup-form" id="signupForm">
 				<label for="email">이메일:</label>
 				<input type="email" id="email" name="email" required>
 
@@ -150,7 +150,7 @@
 				<button type="button" id="loginButton" onclick="checkLogin()" disabled>로그인</button>
 			</div>
 
-			<div class="write-diary-container d-none" id="writeDiaryPopup">
+			<form class="write-diary-container d-none" id="writeDiaryPopup">
 				<div class="select-date d-none" id="writeDiaryDate">
 					<label for="selectDate">날짜 선택</label>
 					<button id="dateYesterday" class="btn-normal" onclick="changeDate(-1)">어제</button>
@@ -226,7 +226,7 @@
 					<button id="nextBtn" disabled>다음</button>
 					<button id="cancelBtn" class="d-none btn-danger" onclick="cancelWriteDiary()">작성 취소</button>
 				</div>
-			</div>
+			</form>
 		</div>
 	</div>
 	</div>

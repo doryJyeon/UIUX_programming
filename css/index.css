@@ -136,6 +136,13 @@
 	display: block;
 }
 
+.signup-form {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
 .signup {
 	padding: 24px;
 	margin-bottom: 50px;
@@ -215,7 +222,8 @@ button.popup-close {
 
 
 /* popup login ------------------- */
-.diary-img-background>div {
+.diary-img-background>div,
+.diary-img-background>form {
 	width: 46%;
 	height: 100%;
 	display: flex;
@@ -494,7 +502,8 @@ div.diary-container-full {
 		padding: 0;
 	}
 
-	.diary-img-background>div {
+	.diary-img-background>div,
+	.diary-img-background>form {
 		width: 50%;
 		height: 100%;
 		box-sizing: border-box;
@@ -530,7 +539,8 @@ div.diary-container-full {
 		background-position: 5% 0;
 	}
 
-	.diary-img-background>div {
+	.diary-img-background>div,
+	.diary-img-background>form {
 		width: 100%;
 		height: 100%;
 		box-sizing: border-box;
@@ -606,6 +616,11 @@ div.diary-container-full {
 
 	.step-list {
 		gap: 20px;
+	}
+
+	.signup-form {
+		flex-direction: column;
+		align-items: stretch;
 	}
 
 	.signup {

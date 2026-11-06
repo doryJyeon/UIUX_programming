@@ -101,7 +101,7 @@ function changeMessage(message, type, alertMsg = false, moveFocus = false) {
     if (moveFocus) moveFocus.focus();
 }
 
-// 이벤트 감지
+// 회원 가입 이벤트 감지
 signupForm.addEventListener("submit", handleSignup);
 
 signupForm.addEventListener("change", (e) => {
@@ -185,7 +185,9 @@ function closePopup() {
     changeFeels("reset");
     useTitleDate.checked = false;
     writeTitle.value = "";
+    writeTitle.classList.remove("border-danger");
     writeDiaryTextarea.value = "";
+    writeDiaryTextarea.classList.remove("border-danger");
     writeTextareaLength.textContent = "0/1000";
 }
 
@@ -242,10 +244,35 @@ loginPassword.addEventListener("input", () => {
     loginBtnDisabled();
 })
 
+// 일기 저장 이벤트 감지
+writeDiaryPopup.addEventListener("submit", saveDiary);
+
 // 일기 저장
-function saveDiary() {
-    alert("일기가 저장되었습니다.");
-    closePopup();
+function saveDiary(event) {
+    event.preventDefault();
+    if (confirm("작성한 일기를 저장하시겠습니까?")) {
+
+        if (!selectDate.value) {
+            showWriteDiarys(0);
+            return alert("날짜를 선택해주세요.");
+        }
+        if (!selectFeel.value) {
+            showWriteDiarys(1);
+            return alert("감정을 선택해주세요.");
+        }
+        if (!writeTitle.value) {
+            showWriteDiarys(2);
+            return alert("제목을 입력해주세요.");
+        }
+        if (!writeDiaryTextarea.value) {
+            showWriteDiarys(3);
+            return alert("일기 내용을 입력해주세요.");
+        }
+        closePopup();
+
+        // 일기 작성 성공 시 마이페이지로 이동
+        location.href = "my_page.html";
+    }
 }
 
 // 일기 작성 화면(=다음 클릭 이동)
@@ -299,6 +326,7 @@ function showWriteDiarys(index) {
             nextBtn.textContent = "일기 저장";
             nextBtn.disabled = false;
             nextBtn.onclick = saveDiary;
+            nextBtn.setAttribute("type", "submit");
             cancelBtn.classList.remove("d-none");
             break;
         default:
@@ -311,6 +339,7 @@ function showWriteDiarys(index) {
     if (index !== 0 && index !== (lastItem - 1)) {
         prevBtn.onclick = () => showWriteDiarys(index - 1);
         nextBtn.onclick = () => showWriteDiarys(index + 1);
+        nextBtn.setAttribute("type", "button");
         cancelBtn.classList.add("d-none");
     }
 }
@@ -351,7 +380,7 @@ function changeFeels(li) {
 useTitleDate.addEventListener("change", () => {
     if (useTitleDate.checked) {
         const selectDateKo = selectDate.value.replace(/^(\d{4})-(\d{2})-(\d{2})$/, "$1년 $2월 $3일");
-        writeDiaryTitle.querySelectorAll("p").forEach((item) => {
+        writeDiaryTitle.querySelectorAll(':scope > *:not(label)').forEach((item) => {
             item.classList.add("d-none");
         })
         writeTitle.value = `${selectDateKo} 일기`;
@@ -360,12 +389,16 @@ useTitleDate.addEventListener("change", () => {
     } else {
         // 취소 시 입력된 제목 초기화
         writeTitle.value = "";
-        writeDiaryTitle.querySelectorAll("p").forEach((item) => {
+        writeDiaryTitle.querySelectorAll(':scope > *:not(label)').forEach((item) => {
             item.classList.remove("d-none");
         })
         writeTitle.removeAttribute("readonly");
         writeTitle.style.pointerEvents = "auto";
     }
+    // 제목 input 이벤트 발생시키기
+    writeTitle.dispatchEvent(new Event("input", {
+        bubbles: true
+    }));
 })
 
 // 제목 입력
@@ -374,6 +407,7 @@ writeTitle.addEventListener("input", () => {
     if (writeTitle.value.length >= 3 && writeTitle.value.length <= 100) {
         writeTitleError.textContent = "";
         writeTitle.removeAttribute("aria-invalid");
+        writeTitle.classList.remove("border-danger");
         nextBtn.disabled = false;
     } else {
         nextBtn.disabled = true;
@@ -383,6 +417,7 @@ writeTitle.addEventListener("input", () => {
             writeTitleError.textContent = "제목은 50글자 이하로 입력할 수 있습니다.";
         }
         writeTitle.setAttribute("aria-invalid", "true");
+        writeTitle.classList.add("border-danger");
         writeTitle.focus();
     }
 })
@@ -393,10 +428,12 @@ writeDiaryTextarea.addEventListener("input", () => {
 
     writeTextareaLength.textContent = textLength >= 1000 ? "1000/1000" : `${textLength}/1000`;
     if (textLength >= 5) {
+        writeDiaryTextarea.classList.remove("border-danger");
         writeTextareaMent.querySelector("p:first-of-type").textContent = "";
         writeTextareaMent.querySelector("p").classList.remove("c-danger");
         nextBtn.disabled = false;
     } else {
+        writeDiaryTextarea.classList.add("border-danger");
         writeTextareaMent.querySelector("p:first-of-type").textContent = "5글자 이상 입력해주세요.";
         writeTextareaMent.querySelector("p").classList.add("c-danger");
         nextBtn.disabled = true;

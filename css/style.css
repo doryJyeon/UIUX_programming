@@ -164,13 +164,6 @@ p {
 	font-weight: 500;
 }
 
-form {
-	display: flex;
-	gap: 12px;
-	align-items: center;
-	flex-wrap: wrap;
-}
-
 input,
 button,
 .btn {
@@ -278,12 +271,16 @@ button:disabled {
 }
 
 .c-danger {
-	color: #E96B6B;
+	color: #E96B6B !important;
 }
 
 .c-success {
 	color: #75658F;
 	font-weight: bold;
+}
+
+.border-danger {
+	border-color: #E96B6B !important;
 }
 
 /* tablet size */
@@ -330,11 +327,6 @@ button:disabled {
 
 	nav a {
 		padding: 8px 0;
-	}
-
-	form {
-		flex-direction: column;
-		align-items: stretch;
 	}
 
 	input,
