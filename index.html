@@ -155,8 +155,11 @@
 					<label for="selectDate">날짜 선택</label>
 					<button id="dateYesterday" class="btn-normal" onclick="changeDate(-1)">어제</button>
 					<button id="dateToday" class="btn-normal" onclick="changeDate()">오늘</button>
-					<input type="date" name="selectDate" id="selectDate" required>
-					<p>어제 이전 날짜는 직접 설정해주세요.</p>
+					<input type="date" name="selectDate" id="selectDate"
+						requiredaria-describedby="selectDateHelp selectDateError" required>
+					<p id="selectDateHelp">어제 이전 날짜는 직접 설정해주세요.</p>
+					<p id="selectDateError" class="c-danger d-none" role="alert">해당 날짜는 이미 작성한 일기가 있습니다. 다른 날짜를 선택해주세요.
+					</p>
 				</div>
 
 				<div class="select-feel d-none" id="writeDiaryFeel">

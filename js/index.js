@@ -16,6 +16,7 @@ const loginButton = document.querySelector("#loginButton");
 // 일기 작성 시 사용
 const writeDiaryDate = document.querySelector("#writeDiaryDate");
 const selectDate = document.querySelector("#selectDate");
+const selectDateError = document.querySelector("#selectDateError");
 const writeDiaryFeel = document.querySelector("#writeDiaryFeel");
 const feelList = document.querySelector("#feelList");
 const selectFeel = document.querySelector("#selectFeel");
@@ -360,11 +361,25 @@ function showWriteDiarys(index) {
 function changeDate(day = 0) {
     selectDate.value = getDate(day);
     nextBtn.disabled = false;
+    // 날짜 중복 체크를 위해 input 이벤트 발생
+    selectDate.dispatchEvent(new Event("change", {
+        bubbles: true
+    }));
 }
 
 // 날짜 변경 감지
 selectDate.addEventListener("change", () => {
-    selectDate.value ? nextBtn.disabled = false : nextBtn.disabled = true;
+    // 작성한 일기에서 날짜 중복 체크
+    const existingDiaries = JSON.parse(localStorage.getItem("diaries")) || {};
+    if (existingDiaries[selectDate.value]) {
+        selectDate.classList.add("border-danger");
+        selectDateError.classList.remove("d-none");
+        nextBtn.disabled = true;
+    } else {
+        selectDate.classList.remove("border-danger");
+        selectDateError.classList.add("d-none");
+        nextBtn.disabled = false;
+    }
 })
 
 // 감정 선택 색상 & 값 변경
