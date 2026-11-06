@@ -226,10 +226,24 @@ button.btn-normal,
 	border: 1px solid #A69AC4;
 }
 
+button.btn-danger,
+.btn-danger {
+	background-color: #fff;
+	color: #E96B6B;
+	box-sizing: border-box;
+	border: 1px solid #E96B6B;
+}
+
 button:hover,
 .btn:hover {
 	background-color: #A69AC4;
 	color: #423B4D;
+}
+
+button.btn-danger:hover,
+.btn-danger:hover {
+	background-color: #E96B6B;
+	color: #fff;
 }
 
 button:focus,
@@ -248,6 +262,13 @@ button:active,
 	background-color: #75658F;
 	transform: scale(1.05);
 	color: #FDFAF6;
+}
+
+button.btn-danger:active,
+.btn-danger:active {
+	background-color: #E96B6B;
+	color: #fff;
+	opacity: 0.7;
 }
 
 button:disabled {
