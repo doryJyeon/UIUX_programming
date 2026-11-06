@@ -39,6 +39,7 @@ const checkDiary = document.querySelector("#checkDiary");
 // 일기 작성 시 이전, 다음 버튼
 const prevBtn = document.querySelector("#prevBtn");
 const nextBtn = document.querySelector("#nextBtn");
+const saveBtn = document.querySelector("#saveBtn");
 const cancelBtn = document.querySelector("#cancelBtn");
 // 비밀번호 유효성 정규식
 const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
@@ -181,14 +182,19 @@ function closePopup() {
     loginEmail.value = "";
     loginPassword.value = "";
     selectDate.value = "";
+    selectDate.classList.remove("border-danger");
+    selectDateError.classList.add("d-none");
     // 감정 해제
     selectFeel.value = "";
     changeFeels("reset");
     useTitleDate.checked = false;
+    useTitleDate.dispatchEvent(new Event("change", { bubbles: true }));
     writeTitle.value = "";
     writeTitle.classList.remove("border-danger");
+    writeTitleError.textContent = "";
     writeDiaryTextarea.value = "";
     writeDiaryTextarea.classList.remove("border-danger");
+    writeTextareaMent.querySelector("p").classList.remove("c-danger");
     writeTextareaLength.textContent = "0/1000";
 }
 
@@ -321,25 +327,24 @@ function showWriteDiarys(index) {
             nextBtn.onclick = () => showWriteDiarys(index + 1);
             break;
         case 1:
-            prevBtn.textContent = "날짜 선택";
+            prevBtn.textContent = "날짜 수정";
             nextBtn.textContent = "제목 작성";
             break;
         case 2:
-            prevBtn.textContent = "감정 선택";
+            prevBtn.textContent = "감정 수정";
             nextBtn.textContent = "일기 내용";
             break;
         case 3:
-            prevBtn.textContent = "제목 작성"
+            nextBtn.disabled = writeDiaryTextarea.value.length >= 5 ? false : true;
+            prevBtn.textContent = "제목 수정"
             nextBtn.textContent = "일기 작성";
             break;
         case 4:
-            getWriteData()
+            getWriteData();
             prevBtn.onclick = () => showWriteDiarys(index - 1);
-            prevBtn.textContent = "일기 내용";
-            nextBtn.textContent = "일기 저장";
-            nextBtn.disabled = false;
-            nextBtn.onclick = saveDiary;
-            nextBtn.setAttribute("type", "submit");
+            prevBtn.textContent = "내용 수정";
+            nextBtn.classList.add("d-none");
+            saveBtn.classList.remove("d-none");
             cancelBtn.classList.remove("d-none");
             break;
         default:
@@ -352,7 +357,10 @@ function showWriteDiarys(index) {
     if (index !== 0 && index !== (lastItem - 1)) {
         prevBtn.onclick = () => showWriteDiarys(index - 1);
         nextBtn.onclick = () => showWriteDiarys(index + 1);
-        nextBtn.setAttribute("type", "button");
+    }
+    if (index !== (lastItem - 1)) {
+        nextBtn.classList.remove("d-none");
+        saveBtn.classList.add("d-none");
         cancelBtn.classList.add("d-none");
     }
 }
