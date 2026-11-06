@@ -464,7 +464,7 @@ div.diary-container-full {
 	flex: 0 0 auto;
 }
 
-#nextBtn {
+#saveBtn {
 	margin-left: auto;
 }
 
@@ -554,6 +554,10 @@ div.diary-container-full {
 	.move-btns>button {
 		flex: 1;
 	}
+
+	#cancelBtn {
+		margin-left: auto;
+	}
 }
 
 /* tablet size */
@@ -629,10 +633,6 @@ div.diary-container-full {
 
 	.write-title>label:nth-child(2)>input {
 		width: fit-content;
-	}
-
-	#cancelBtn {
-		margin-left: auto;
 	}
 }
 
