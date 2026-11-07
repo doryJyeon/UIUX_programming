@@ -266,11 +266,11 @@ function saveDiary(event) {
             showWriteDiarys(1);
             return alert("감정을 선택해주세요.");
         }
-        if (!writeTitle.value) {
+        if (!writeTitle.value || writeTitle.value.length < 2 || writeTitle.value.length > 50) {
             showWriteDiarys(2);
             return alert("제목을 입력해주세요.");
         }
-        if (!writeDiaryTextarea.value) {
+        if (!writeDiaryTextarea.value || writeDiaryTextarea.value.length < 5 || writeDiaryTextarea.value.length > 1000) {
             showWriteDiarys(3);
             return alert("일기 내용을 입력해주세요.");
         }
@@ -297,16 +297,24 @@ function saveDiary(event) {
 // 일기 작성 화면(=다음 클릭 이동)
 function showWriteDiarys(index) {
     const writeDiaryPopupItem = writeDiaryPopup.querySelectorAll(":scope > div");
-    const thisWriteValue = writeDiaryPopupItem[index].querySelector('input')?.value;
+    const thisWriteValue = writeDiaryPopupItem[index].querySelector('input:not([type="checkbox"])')?.value;
     const lastItem = writeDiaryPopupItem.length - 1;
 
     writeDiaryPopupItem.forEach((item, idx) => {
         if (idx === lastItem) {
-            // 마지막은 버튼으로 d-none 적용X
+            // 마지막은 [이전, 다음]버튼으로 d-none 적용X
             return
         }
         index === idx ? item.classList.remove("d-none") : item.classList.add("d-none");
+        // console 알림 제거용 input required 속성 추가/해제
+        if (index === idx) {
+            writeDiaryPopupItem[idx].querySelector('input:not([type="checkbox"])')?.setAttribute("required", true);
+        } else {
+            writeDiaryPopupItem[idx].querySelector('input:not([type="checkbox"])')?.removeAttribute("required");
+        }
     });
+    // console 알림 - required 속성 해제
+    writeDiaryTextarea.removeAttribute("required", "false");
 
     // 감정 선택1, 일기 내용3, 일기 확인4는 공책 전체 화면 사용
     if (index === 1 || index === 3 || index === 4) {
@@ -341,6 +349,7 @@ function showWriteDiarys(index) {
             break;
         case 4:
             getWriteData();
+            writeDiaryTextarea.setAttribute("required", true);
             prevBtn.onclick = () => showWriteDiarys(index - 1);
             prevBtn.textContent = "내용 수정";
             nextBtn.classList.add("d-none");
