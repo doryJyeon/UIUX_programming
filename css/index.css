@@ -1,7 +1,22 @@
-#writeDiary,
-#btnMypage {
-	font-size: 20px;
-	box-shadow: 0px 4px 8px #777777aa;
+.left-line {
+	position: relative;
+}
+
+.left-line::before {
+	content: "";
+	position: absolute;
+	width: 1px;
+	height: 60%;
+	background: #66666666;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	margin-left: -11px;
+	margin-top: 7px;
+}
+
+#main {
+	padding-top: 120px;
 }
 
 #about img {
@@ -91,6 +106,10 @@
 	margin: 0;
 }
 
+#steps {
+	margin-bottom: 124px;
+}
+
 .step-list {
 	display: flex;
 	justify-content: space-around;
@@ -145,7 +164,7 @@
 
 .signup {
 	padding: 24px;
-	margin-bottom: 50px;
+	margin-bottom: 80px;
 	background-color: #F0EBF5;
 	border: 1px solid #A69AC4;
 	border-radius: 8px;
@@ -560,6 +579,23 @@ div.diary-container-full {
 	}
 }
 
+@media (max-width: 900px) {
+	#main {
+		padding-top: 100px;
+	}
+
+	.left-line {
+		margin: 20px 0 10px;
+	}
+
+	.left-line::before {
+		width: 100%;
+		height: 1px;
+		margin: 0;
+		margin-top: -15px;
+	}
+}
+
 /* tablet size */
 @media (max-width: 800px) {
 	#about img {
@@ -692,6 +728,13 @@ div.diary-container-full {
 }
 
 @media (max-width: 390px) {
+	.left-line {
+		margin: 20px 0 0;
+	}
+
+	.left-line::before {
+		margin-top: -10px;
+	}
 
 	#writeDiary,
 	#btnMypage {

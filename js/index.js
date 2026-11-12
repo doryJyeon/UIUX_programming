@@ -1,3 +1,10 @@
+const menuMmobileQuery = window.matchMedia("(max-width: 900px)");
+const menuToggleBtn = document.querySelector("#menuToggleBtn");
+const menuIcon = menuToggleBtn.querySelector("i");
+const headerNav = document.querySelector("#headerNav");
+const mainNav = document.querySelector("#mainNav");
+const menuLinks = mainNav.querySelectorAll("a");
+const sections = document.querySelectorAll("main section");
 const signupForm = document.querySelector("#signup");
 const formMessage = document.querySelector("#formMessage");
 const featureTabs = document.querySelectorAll("#featureTabs > button");
@@ -48,6 +55,80 @@ const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
 let subscribed = false;
 // 로그인 후 이동할 페이지 구분
 let moveLoginAfter = false;
+
+// 메뉴 open/close
+function setMenu(open) {
+    document.querySelector("#header").classList.toggle("is-open", open);
+    headerNav.classList.toggle("is-open", open);
+    mainNav.classList.toggle("is-open", open);
+
+    menuToggleBtn.setAttribute(
+        "aria-expanded",
+        String(open)
+    );
+
+    menuIcon.classList.toggle("bi-list", !open);
+    menuIcon.classList.toggle("bi-x-lg", open);
+}
+
+// 메뉴 open/close 버튼
+menuToggleBtn.addEventListener("click", () => {
+    const isOpen = menuIcon.classList.contains("bi-x-lg");
+    setMenu(!isOpen);
+});
+
+// 화면 크기가 바뀌면 메뉴 상태 동기화
+function handleResize() {
+    setMenu(false);
+}
+
+menuMmobileQuery.addEventListener("change", handleResize);
+
+// 메뉴 클릭 시 해당 영역으로 이동하고 모바일 메뉴 화면 닫기
+menuLinks.forEach(link => {
+    link.addEventListener("click", () => {
+        setMenu(false);
+    });
+});
+
+// 현재 영역에 해당하는 메뉴 표시
+function setCurrentMenu(id) {
+    menuLinks.forEach(link => {
+        if (link.hash === `#${id}`) {
+            link.setAttribute("aria-current", "location");
+            link.classList.add("is-current");
+        } else {
+            link.removeAttribute("aria-current");
+            link.classList.remove("is-current");
+        }
+    });
+}
+
+// 상단에서 90px 이하 영역 진입했을 때 현재 메뉴 변경
+function updateCurrentMenu() {
+    const targetY = 110;
+    let currentSection = sections[0];
+
+    sections.forEach(section => {
+        if (section.getBoundingClientRect().top <= targetY) {
+            currentSection = section;
+        }
+    });
+
+    // 페이지 맨 아래에 도달하면 마지막 섹션 선택
+    if (window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 2) {
+        currentSection = sections[sections.length - 1];
+    }
+
+    if (currentSection) {
+        setCurrentMenu(currentSection.id);
+    }
+}
+
+window.addEventListener("scroll", updateCurrentMenu);
+window.addEventListener("resize", updateCurrentMenu);
+updateCurrentMenu();
 
 // 날짜 생성
 function getDate(day = 0) {

@@ -21,27 +21,40 @@
 		핵심 행동: 감정 일기 작성 및 AI 위로 받기, 정리된 감정 메모하기
 		정보 순서: 서비스 소개 → 핵심 기능 안내 → 이용 방법 → 회원가입
     -->
-	<header>
-		<h1>감정 일기 서비스</h1>
-		<p>오늘의 마음을 기록하고, 따뜻한 위로를 받아보세요.</p>
-		<p>하루 동안 느꼈던 감정과 생각을 자유롭게 기록해 보세요.<br>
-			AI가 당신의 이야기에 귀 기울이고, 따뜻한 공감과 위로를 전해드립니다.</p>
-
-		<nav aria-label="주요 메뉴">
-			<a href="#about">서비스소개</a>
-			<a href="#features">기능안내</a>
-			<a href="#steps">이용방법</a>
-			<a href="#signup">회원가입</a>
+	<header id="header">
+		<nav aria-label="주요 메뉴" aria-expanded="false" id="headerNav" class="header-nav">
+			<a href="./index.html" class="nav-logo">
+				<img src="assets/images/logo.png" alt="웃는 얼굴의 로고">Emotion diary
+			</a>
+			<ul id="mainNav" class="nav-menu">
+				<li><a href="#about">서비스소개</a></li>
+				<li><a class="is-current" aria-current="page" href="#features">기능안내</a></li>
+				<li><a href="#steps">이용방법</a></li>
+				<li><a href="#signup">회원가입</a></li>
+				<li class="left-line">
+					<button id="writeDiary" onclick="openPopup()">
+						<i class="bi bi-journal-plus"></i> 일기 작성
+					</button>
+				</li>
+				<li>
+					<button id="btnMypage" onclick="moveMyPage()">
+						<i class="bi bi-journal-bookmark-fill"></i> 마이페이지
+					</button>
+				</li>
+			</ul>
+			<button id="menuToggleBtn" class="is-open" aria-controls="navMenu" aria-expanded="false">
+				<i class="bi bi-list" aria-hidden="true"></i>
+			</button>
 		</nav>
-
 	</header>
 
 	<main>
-		<button id="writeDiary" onclick="openPopup()" class="mobile-full">일기 작성 <i
-				class="bi bi-journal-plus"></i></button>
-		<button id="btnMypage" onclick="moveMyPage()" class="btn-white bold mobile-full">
-			마이페이지 <i class="bi bi-journal-bookmark-fill c-danger"></i>
-		</button>
+		<section id="main">
+			<h1>감정 일기 서비스</h1>
+			<p>오늘의 마음을 기록하고, 따뜻한 위로를 받아보세요.</p>
+			<p>하루 동안 느꼈던 감정과 생각을 자유롭게 기록해 보세요.<br>
+				AI가 당신의 이야기에 귀 기울이고, 따뜻한 공감과 위로를 전해드립니다.</p>
+		</section>
 
 		<section id="about">
 			<h2>서비스 소개</h2>

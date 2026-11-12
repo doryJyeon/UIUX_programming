@@ -27,8 +27,9 @@ html {
 }
 
 header {
-	height: 80px;
 	padding: 15px 3%;
+	position: relative;
+	box-shadow: none;
 }
 
 nav.header-nav {
@@ -55,13 +56,14 @@ footer {
 }
 
 main {
-	width: 100vw;
+	width: 100%;
 	height: calc(100vh - 80px - 70px);
 	overflow-y: hidden;
 	padding: 0 3%;
 	display: grid;
 	gap: 30px;
 	grid-template-columns: 3fr 2fr;
+	box-sizing: border-box;
 }
 
 section {
