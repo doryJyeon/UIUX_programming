@@ -443,7 +443,7 @@ button:disabled {
 
 	#menuToggleBtn.is-open {
 		position: absolute;
-		top: 8px;
+		top: 0;
 		right: 0;
 	}
 }
@@ -482,6 +482,10 @@ button:disabled {
 		background: #FDFAF6;
 		padding: 30px 24px 50px;
 		box-shadow: #aaaaaa 2px 0px 10px;
+	}
+
+	#menuToggleBtn.is-open {
+		top: 8px;
 	}
 
 	section {

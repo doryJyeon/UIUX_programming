@@ -1,6 +1,7 @@
 // 기존 일기 불러오기
 const existingDiaries = JSON.parse(localStorage.getItem("diaries")) || {};
 
+const emotionFilter = document.querySelector("#emotionFilter");
 // 작성한 일기
 const diaryList = document.querySelector("#diaryList");
 const diaryContent = document.querySelector("#diaryContent");
@@ -43,18 +44,57 @@ document.addEventListener("DOMContentLoaded", () => {
         diaryContents.innerHTML = `<tr>
             <td colspan="3" class="text-center">작성한 일기가 없습니다.</td>
         </tr>`;
+        document.querySelector("#filterCount").textContent = `0개`;
     } else {
         const sortedDiaries = Object.entries(existingDiaries).sort((a, b) => new Date(b[0]) - new Date(a[0]));
         diaryContents.innerHTML = sortedDiaries.map(([date, diary]) => `
-        <tr>
-            <td>${date.replaceAll("-", ".")}</td>
-            <td><p onclick="showDiaryContent('${date}')">${diary.title}</p></td>
-            <td><img src="assets/images/emoji/face_${diary.feel}.png" alt="${diary.feel} 표정"></td>
-        </tr>
-    `).join("");
+            <tr>
+                <td>${date.replaceAll("-", ".")}</td>
+                <td><p onclick="showDiaryContent('${date}')">${diary.title}</p></td>
+                <td><img src="assets/images/emoji/face_${diary.feel}.png" alt="${diary.feel} 표정"></td>
+            </tr>
+        `).join("");
+
+        document.querySelector("#filterCount").textContent = `${Object.keys(existingDiaries).length}개`;
     }
 });
 
+// 감정 필터 변경
+emotionFilter.addEventListener("change", () => {
+    // 로컬 스토리지에서 일기 데이터 가져오기
+    const allDiaries = JSON.parse(localStorage.getItem("diaries")) || {};
+    let count = 0;
+
+    // 선택한 감정 가져오기
+    const selectedEmotion = emotionFilter.value;
+
+    // 기존 목록 비우기
+    diaryContents.innerHTML = "";
+
+    // 일기 목록 필터링
+    Object.entries(allDiaries).forEach(([date, diary]) => {
+        if (selectedEmotion === "all" || diary.feel === selectedEmotion) {
+            const tr = document.createElement("tr");
+
+            tr.innerHTML = `
+                <td>${date.replaceAll("-", ".")}</td>
+                <td><p onclick="showDiaryContent('${date}')">${diary.title}</p></td>
+                <td><img src="assets/images/emoji/face_${diary.feel}.png" alt="${diary.feel} 표정"></td>
+            `;
+
+            diaryContents.appendChild(tr);
+            count++;
+        }
+    });
+
+    if (count === 0) {
+        diaryContents.innerHTML = `<tr>
+            <td colspan="3" class="text-center">작성한 일기가 없습니다.</td>
+        </tr>`;
+    }
+
+    document.querySelector("#filterCount").textContent = `${count}개`;
+});
 
 // AI 피드백 스타일 설정 보이기
 function showAiSetting() {

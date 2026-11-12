@@ -66,6 +66,7 @@ function setMenu(open) {
         "aria-expanded",
         String(open)
     );
+    menuToggleBtn.setAttribute("aria-label", open ? "메뉴 닫기" : "메뉴 열기");
 
     menuIcon.classList.toggle("bi-list", !open);
     menuIcon.classList.toggle("bi-x-lg", open);

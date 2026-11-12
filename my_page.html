@@ -23,13 +23,27 @@
     -->
 	<header>
 		<nav class="header-nav">
-			<a href="./index.html"><img src="assets/images/logo.png" alt="웃는 얼굴의 로고">감정 일기 서비스</a>
+			<a href="./index.html"><img src="assets/images/logo.png" alt="웃는 얼굴의 로고">Emotion diary</a>
 		</nav>
 	</header>
 
 	<main>
 		<section class="diary-list-container">
-			<h2>작성한 일기</h2>
+			<div class="diary-list-title">
+				<h2>작성한 일기</h2>
+				<div class="emotion-filter">
+					<label for="emotionFilter">감정 :</label>
+					<select id="emotionFilter">
+						<option value="all">전체</option>
+						<option value="happy">행복</option>
+						<option value="good">좋음</option>
+						<option value="comfortable">보통</option>
+						<option value="sad">슬픔</option>
+						<option value="bad">나쁨</option>
+					</select>
+					<span id="filterCount">0개</span>
+				</div>
+			</div>
 
 			<div class="diary-left" id="diaryList">
 				<div class="diary-list-table">
