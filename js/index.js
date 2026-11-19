@@ -260,8 +260,10 @@ function openPopup(localtion = false) {
         showLoginPopup();
     }
 
-    // 표시된 팝업 내부의 첫 번째 요소로 포커스 이동
-    const focusableElements = popupEl.querySelectorAll(
+    // 표시된 화면 내부의 첫 번째 요소로 포커스 이동
+    const activeContainer = isLogin ? writeDiaryPopup : loginContainer;
+
+    const focusableElements = activeContainer.querySelectorAll(
         'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
     );
 
