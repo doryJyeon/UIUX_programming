@@ -41,7 +41,11 @@
 						<option value="sad">슬픔</option>
 						<option value="bad">나쁨</option>
 					</select>
-					<span id="filterCount">0개</span>
+					<span id="filterCount" aria-live="polite">0개</span>
+					<button class="btn-transparent btn-close" hidden type="button" id="resetFilterBtn"
+						aria-label="필터 초기화">
+						<i class="bi bi-x-lg" aria-hidden="true"></i>
+					</button>
 				</div>
 			</div>
 

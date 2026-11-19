@@ -22,13 +22,16 @@
 		정보 순서: 서비스 소개 → 핵심 기능 안내 → 이용 방법 → 회원가입
     -->
 	<header id="header">
-		<nav aria-label="주요 메뉴" aria-expanded="false" id="headerNav" class="header-nav">
+		<nav aria-label="주요 메뉴" id="headerNav" class="header-nav">
 			<a href="./index.html" class="nav-logo">
-				<img src="assets/images/logo.png" alt="웃는 얼굴의 로고">Emotion diary
+				<img src="assets/images/logo.png" alt="Emotion diary 로고">Emotion diary
 			</a>
+			<button id="menuToggleBtn" class="is-open" aria-label="메뉴 열기" aria-controls="mainNav" aria-expanded="false">
+				<i class="bi bi-list" aria-hidden="true"></i> <span>menu</span>
+			</button>
 			<ul id="mainNav" class="nav-menu">
 				<li><a href="#about">서비스소개</a></li>
-				<li><a class="is-current" aria-current="page" href="#features">기능안내</a></li>
+				<li><a class="is-current" aria-current="location" href="#features">기능안내</a></li>
 				<li><a href="#steps">이용방법</a></li>
 				<li><a href="#signup">회원가입</a></li>
 				<li class="left-line">
@@ -42,13 +45,10 @@
 					</button>
 				</li>
 			</ul>
-			<button id="menuToggleBtn" class="is-open" aria-label="메뉴 열기" aria-controls="navMenu" aria-expanded="false">
-				<i class="bi bi-list" aria-hidden="true"></i> <span>menu</span>
-			</button>
 		</nav>
 	</header>
 
-	<main>
+	<main tabindex="-1">
 		<section id="main">
 			<h1>감정 일기 서비스</h1>
 			<p>오늘의 마음을 기록하고, 따뜻한 위로를 받아보세요.</p>
@@ -60,7 +60,7 @@
 			<h2>서비스 소개</h2>
 			<h3>오늘의 마음을 기록하고, <br class="pc-none">따뜻한 위로를 받아보세요.</h3>
 
-			<img src="assets/images/main.png" alt="감정 일기 사용 예시 이미지">
+			<img src="assets/images/main.png" alt="다양한 감정 표정과 오늘의 일기가 쓰여있는 일기장, 옆에는 격려해주는 위로의 메모가 놓여 있다.">
 
 			<p>하루 동안 있었던 일과 그로 인해 느껴졌던 감정, 생각을 자유롭게 기록해 보세요.</p>
 			<p>AI가 당신의 이야기에 귀 기울이고, 따뜻한 공감과 위로를 전해드립니다.</p>
@@ -70,14 +70,14 @@
 		<section id="features">
 			<h2>기능 안내</h2>
 
-			<div class="feature-tabs" id="featureTabs" role="tab-list" aria-label="기능 선택 탭">
+			<div class="feature-tabs" id="featureTabs" role="tablist" aria-label="기능 선택 탭">
 				<button id="tabWirte" class="active" onclick="showFeature('Wirte', this)">일기 작성</button>
 				<button id="tabRead" onclick="showFeature('Read', this)">AI 위로</button>
 				<button id="tabMemo" onclick="showFeature('Memo', this)">메모 작성</button>
 			</div>
 			<div class="feature-cards" id="featureCards" aria-label="기능 상세 안내">
 				<div class="feature-card active" id="featureWirte">
-					<img src="assets/images/wirte.png" alt="일기를 작성하는 모습의 이미지" />
+					<img src="assets/images/wirte.png" alt="감정을 선택하고 일기를 작성중인 모습" />
 					<h3>감정 일기 작성</h3>
 					<p>
 						"오늘의 마음을 있는 그대로 작성해 보세요."<br>
@@ -87,7 +87,7 @@
 					</p>
 				</div>
 				<div class="feature-card" id="featureRead">
-					<img src="assets/images/ai_read.png" alt="ai가 일기를 읽고 생각하는 모습의 이미지" />
+					<img src="assets/images/ai_read.png" alt="ai가 일기를 읽고 위로의 말을 생각하는 모습" />
 					<h3>AI 위로 받기</h3>
 					<p>
 						"나만을 위한 AI의 따뜻한 공감과 위로"<br>
@@ -96,7 +96,7 @@
 					</p>
 				</div>
 				<div class="feature-card" id="featureMemo">
-					<img src="assets/images/memo.png" alt="ai의 위로를 보고난 후 메모를 붙인 모습의 이미지" />
+					<img src="assets/images/memo.png" alt="ai의 위로를 보고난 후 일기장에 메모를 붙인 모습" />
 					<h3>정리된 감정 메모하기</h3>
 					<p>
 						"정리된 감정을 메모로 남갸보세요."<br>
@@ -127,7 +127,7 @@
 
 			<form action="" method="" class="signup-form" id="signupForm">
 				<label for="email">이메일:</label>
-				<input type="email" id="email" name="email" required>
+				<input type="email" id="email" name="email" required maxlength="50">
 
 				<label for="password">비밀번호:</label>
 				<input type="password" id="password" name="password" required>
@@ -145,8 +145,7 @@
 		</section>
 	</main>
 
-	<div class="popup-mask d-none" id="popup">
-		<button class="popup-close" onclick="closePopup()"><i class="bi bi-x-square"></i></button>
+	<div class="popup-mask d-none" id="popup" role="dialog" aria-modal="true">
 		<div class="bg-table-tablet"></div>
 		<div class="diary-img-background">
 
@@ -163,12 +162,12 @@
 				<button type="button" id="loginButton" onclick="checkLogin()" disabled>로그인</button>
 			</div>
 
-			<form class="write-diary-container d-none" id="writeDiaryPopup">
+			<form class="write-diary-container d-none" id="writeDiaryPopup" novalidate>
 				<div class="select-date d-none" id="writeDiaryDate">
 					<label for="selectDate">날짜 선택</label>
 					<button id="dateYesterday" class="btn-normal" onclick="changeDate(-1)" type="button">어제</button>
 					<button id="dateToday" class="btn-normal" onclick="changeDate()" type="button">오늘</button>
-					<input type="date" name="selectDate" id="selectDate" required
+					<input type="date" name="selectDate" id="selectDate"
 						aria-describedby="selectDateHelp selectDateError">
 					<p id="selectDateHelp">어제 이전 날짜는 직접 설정해주세요.</p>
 					<p id="selectDateError" class="c-danger d-none" role="alert">해당 날짜는 이미 작성한 일기가 있습니다. 다른 날짜를 선택해주세요.
@@ -179,29 +178,29 @@
 					<label for="selectFeel">기분 선택</label>
 					<p>그날 기분은 어땠나요?</p>
 					<ul class="select-feels" id="feelList">
-						<li onclick="changeFeels(this)">
+						<li onclick="changeFeels(this)" tabindex="0">
 							<img src="assets/images/emoji/face_happy.png" alt="행복한 표정">
 							<p class="bg-red bg-transparent">행복</p>
 						</li>
-						<li onclick="changeFeels(this)">
-							<img src="assets/images/emoji/face_good.png" alt="좋아하는 표정">
+						<li onclick="changeFeels(this)" tabindex="0">
+							<img src="assets/images/emoji/face_good.png" alt="기분이 좋아 보이는 표정">
 							<p class="bg-yellow bg-transparent">좋음</p>
 						</li>
-						<li onclick="changeFeels(this)">
+						<li onclick="changeFeels(this)" tabindex="0">
 							<img src="assets/images/emoji/face_comfortable.png" alt="평온한 모습의 표정">
 							<p class="bg-green bg-transparent">보통</p>
 						</li>
-						<li onclick="changeFeels(this)">
+						<li onclick="changeFeels(this)" tabindex="0">
 							<img src="assets/images/emoji/face_sad.png" alt="슬퍼하는 표정">
 							<p class="bg-blue bg-transparent">슬픔</p>
 						</li>
-						<li onclick="changeFeels(this)">
+						<li onclick="changeFeels(this)" tabindex="0">
 							<img src="assets/images/emoji/face_bad.png" alt="기분이 나빠보이는 표정">
 							<p class="bg-main bg-transparent">나쁨</p>
 						</li>
 					</ul>
 
-					<input type="hidden" name="selectFeel" id="selectFeel" required>
+					<input type="hidden" name="selectFeel" id="selectFeel">
 				</div>
 
 				<div class="write-title d-none" id="writeDiaryTitle">
@@ -211,11 +210,10 @@
 						날짜를 제목으로 사용하기
 					</label>
 					<input type="text" minlength="2" maxlength="50" name="writeTitle" id="writeTitle"
-						placeholder="제목을 입력해주세요." required
-						aria-describedby="writeTitleHelp writeTitleCount writeTitleError">
+						placeholder="제목을 입력해주세요." aria-describedby="writeTitleHelp writeTitleCount writeTitleError">
 					<div class="field-meta">
 						<p id="writeTitleHelp">2~50글자 이내로 입력해주세요.</p>
-						<p id="writeTitleCount" class="title-length" aria-live="polite">0/50자</p>
+						<p id="writeTitleCount" class="title-length">0/50자</p>
 					</div>
 					<p id="writeTitleError" class="c-danger" role="alert"></p>
 				</div>
@@ -223,7 +221,7 @@
 				<div class="write-dairy d-none" id="writeDiaryDetail">
 					<label for="writeDiaryTextarea">일기 내용</label>
 					<textarea name="writeDiaryTextarea" id="writeDiaryTextarea" rows="10" placeholder="내용을 입력해주세요."
-						minlength="5" maxlength="1000" required></textarea>
+						minlength="5" maxlength="1000"></textarea>
 					<div id="writeTextareaMent">
 						<p>5글자 이상 입력해주세요.</p>
 						<p id="writeTextareaLength">0/1000</p>
@@ -232,20 +230,22 @@
 
 				<div class="check-write-diary d-none" id="checkWriteDiary">
 					<p id="checkDate">2026년 12월 11일</p>
-					<img id="checkFeel" src="assets/images/emoji/face_good.png" alt="사용자가 선택한 감정의 표정">
+					<img id="checkFeel" src="assets/images/emoji/face_good.png" alt="">
 					<p id="checkTitle">제목</p>
 					<p id="checkDiary">내용</p>
 				</div>
 
 				<div class="move-btns" id="writeBtns">
+					<button id="saveBtn" class="d-none" type="submit">일기 저장</button>
 					<button id="prevBtn" class="btn-white" type="button">이전</button>
 					<button id="nextBtn" disabled type="button">다음</button>
-					<button id="saveBtn" class="d-none" type="submit">일기 저장</button>
 					<button id="cancelBtn" class="d-none btn-danger" onclick="cancelWriteDiary()" type="button">작성
 						취소</button>
 				</div>
 			</form>
 		</div>
+
+		<button class="popup-close" onclick="closePopup()"><i class="bi bi-x-square"></i></button>
 	</div>
 	</div>
 

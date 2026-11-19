@@ -52,6 +52,7 @@
 
 .feature-tabs>button.active {
 	background: #A69AC4;
+	font-weight: bold;
 	transform: scaleY(1.2) translateY(-4px);
 }
 
@@ -135,7 +136,7 @@
 }
 
 .step-list>li:nth-child(1) {
-	background-color: #A69AC4;
+	background-color: #C8BEDD;
 }
 
 .step-list>li:nth-child(2) {
@@ -354,8 +355,7 @@ div.diary-container-full {
 	filter: grayscale(0);
 }
 
-.select-feels>li:hover>img,
-.select-feels>li:focus>img {
+.select-feels>li:hover>img {
 	filter: grayscale(0);
 }
 
@@ -477,19 +477,13 @@ div.diary-container-full {
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
+	gap: 5px;
 }
 
 .move-btns>button {
 	flex: 0 0 auto;
 }
 
-#saveBtn {
-	margin-left: auto;
-}
-
-#cancelBtn {
-	margin-left: 10px;
-}
 
 /* // end popup write ----------------------- */
 @media (max-width: 1200px),

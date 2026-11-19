@@ -55,6 +55,8 @@ const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
 let subscribed = false;
 // 로그인 후 이동할 페이지 구분
 let moveLoginAfter = false;
+// 팝업 focus
+let previousFocus = null;
 
 // 메뉴 open/close
 function setMenu(open) {
@@ -62,10 +64,7 @@ function setMenu(open) {
     headerNav.classList.toggle("is-open", open);
     mainNav.classList.toggle("is-open", open);
 
-    menuToggleBtn.setAttribute(
-        "aria-expanded",
-        String(open)
-    );
+    menuToggleBtn.setAttribute("aria-expanded", String(open));
     menuToggleBtn.setAttribute("aria-label", open ? "메뉴 닫기" : "메뉴 열기");
 
     menuIcon.classList.toggle("bi-list", !open);
@@ -92,12 +91,17 @@ menuLinks.forEach(link => {
     });
 });
 
-// 현재 영역에 해당하는 메뉴 표시
+// 현재 영역에 해당하는 메뉴 표시 & title 변경
 function setCurrentMenu(id) {
+    const h2Title = document.querySelector(`#${id} > h2`)?.textContent.trim() || "홈";
+    document.title = h2Title + " | Emotion diary";
+
     menuLinks.forEach(link => {
         if (link.hash === `#${id}`) {
             link.setAttribute("aria-current", "location");
             link.classList.add("is-current");
+
+            // 현재 메뉴에 맞춰 title 변경
         } else {
             link.removeAttribute("aria-current");
             link.classList.remove("is-current");
@@ -105,7 +109,7 @@ function setCurrentMenu(id) {
     });
 }
 
-// 상단에서 90px 이하 영역 진입했을 때 현재 메뉴 변경
+// 상단에서 110px 이하 영역 진입했을 때 현재 메뉴 변경
 function updateCurrentMenu() {
     const targetY = 110;
     let currentSection = sections[0];
@@ -235,6 +239,9 @@ function showFeature(target, el) {
 // 일기 작성 popup =====================
 // 팝업 열기(일기 작성 클릭 시)
 function openPopup(localtion = false) {
+    // 팝업 열기 전 포커스 위치 저장
+    previousFocus = document.activeElement;
+
     // 일기 작성 시 로그인 후 이동 X
     moveLoginAfter = localtion;
     popupEl.classList.remove("d-none");
@@ -252,6 +259,17 @@ function openPopup(localtion = false) {
         alert("회원가입 기능은 아직 구현되지 않았습니다.\n상단 계정 정보를 이용해 로그인해주세요.")
         showLoginPopup();
     }
+
+    // 표시된 팝업 내부의 첫 번째 요소로 포커스 이동
+    const focusableElements = popupEl.querySelectorAll(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    );
+
+    const firstVisibleElement = [...focusableElements].find(
+        element => element.getClientRects().length > 0
+    );
+
+    firstVisibleElement?.focus();
 }
 
 // 팝업 닫기
@@ -278,7 +296,33 @@ function closePopup() {
     writeDiaryTextarea.classList.remove("border-danger");
     writeTextareaMent.querySelector("p").classList.remove("c-danger");
     writeTextareaLength.textContent = "0/1000";
+
+    // 팝업 닫기 전 포커스가 있던 요소로 복귀
+    previousFocus?.focus();
 }
+
+popupEl.addEventListener("keydown", event => {
+    if (event.key !== "Tab") return;
+
+    const focusableElements = [
+        ...popupEl.querySelectorAll(
+            'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )
+    ].filter(element => element.getClientRects().length > 0);
+
+    if (focusableElements.length === 0) return;
+
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
+    if (event.shiftKey && document.activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
+    } else if (!event.shiftKey && document.activeElement === lastElement) {
+        event.preventDefault();
+        firstElement.focus();
+    }
+});
 
 // 로그인 팝업 초기화해서 보여주기
 function showLoginPopup() {
@@ -376,11 +420,28 @@ function saveDiary(event) {
     }
 }
 
+// 작성 중 엔터키로 전송 막기
+writeDiaryPopup.addEventListener("keydown", event => {
+    if (event.key === "Enter" && event.target.tagName !== "TEXTAREA" && event.target.tagName !== "BUTTON") {
+        event.preventDefault();
+    }
+});
+
 // 일기 작성 화면(=다음 클릭 이동)
 function showWriteDiarys(index) {
     const writeDiaryPopupItem = writeDiaryPopup.querySelectorAll(":scope > div");
     const thisWriteValue = writeDiaryPopupItem[index].querySelector('input:not([type="checkbox"])')?.value;
     const lastItem = writeDiaryPopupItem.length - 1;
+    // 단계 변경 후 포커스 이동
+    const focusTargets = [
+        "#selectDate",          // 0: 날짜 선택
+        "#feelList li",         // 1: 기분 선택
+        "#useTitleDate",        // 2: 제목 작성
+        "#writeDiaryTextarea",  // 3: 일기 내용
+        "#saveBtn"            // 4: 작성 내용 확인
+    ];
+
+    const focusTarget = writeDiaryPopup.querySelector(focusTargets[index]);
 
     writeDiaryPopupItem.forEach((item, idx) => {
         if (idx === lastItem) {
@@ -388,15 +449,7 @@ function showWriteDiarys(index) {
             return
         }
         index === idx ? item.classList.remove("d-none") : item.classList.add("d-none");
-        // console 알림 제거용 input required 속성 추가/해제
-        if (index === idx) {
-            writeDiaryPopupItem[idx].querySelector('input:not([type="checkbox"])')?.setAttribute("required", true);
-        } else {
-            writeDiaryPopupItem[idx].querySelector('input:not([type="checkbox"])')?.removeAttribute("required");
-        }
     });
-    // console 알림 - required 속성 해제
-    writeDiaryTextarea.removeAttribute("required", "false");
 
     // 감정 선택1, 일기 내용3, 일기 확인4는 공책 전체 화면 사용
     if (index === 1 || index === 3 || index === 4) {
@@ -431,7 +484,6 @@ function showWriteDiarys(index) {
             break;
         case 4:
             getWriteData();
-            writeDiaryTextarea.setAttribute("required", true);
             prevBtn.onclick = () => showWriteDiarys(index - 1);
             prevBtn.textContent = "내용 수정";
             nextBtn.classList.add("d-none");
@@ -454,6 +506,9 @@ function showWriteDiarys(index) {
         saveBtn.classList.add("d-none");
         cancelBtn.classList.add("d-none");
     }
+
+    // 포커스 이동
+    focusTarget?.focus();
 }
 
 // 버튼으로 날짜 변경
@@ -499,8 +554,18 @@ function changeFeels(li) {
     });
 
     selectFeel.value = feeling;
-    if (feeling !== "reset") nextBtn.disabled = false;
+    if (feeling !== "") nextBtn.disabled = false;
 }
+
+// 감정 선택 키보드로 선택
+feelList.querySelectorAll("li").forEach(item => {
+    item.addEventListener("keydown", event => {
+        if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            changeFeels(item);
+        }
+    });
+});
 
 // 날짜로 제목 입력 checkbox 
 useTitleDate.addEventListener("change", () => {
@@ -544,7 +609,6 @@ writeTitle.addEventListener("input", () => {
         }
         writeTitle.setAttribute("aria-invalid", "true");
         writeTitle.classList.add("border-danger");
-        writeTitle.focus();
     }
 })
 

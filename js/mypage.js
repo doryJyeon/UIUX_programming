@@ -2,6 +2,7 @@
 const existingDiaries = JSON.parse(localStorage.getItem("diaries")) || {};
 
 const emotionFilter = document.querySelector("#emotionFilter");
+const resetFilterBtn = document.querySelector("#resetFilterBtn");
 // 작성한 일기
 const diaryList = document.querySelector("#diaryList");
 const diaryContent = document.querySelector("#diaryContent");
@@ -72,7 +73,7 @@ emotionFilter.addEventListener("change", () => {
     diaryContents.innerHTML = "";
 
     // 일기 목록 필터링
-    Object.entries(allDiaries).forEach(([date, diary]) => {
+    Object.entries(allDiaries).sort((a, b) => new Date(b[0]) - new Date(a[0])).forEach(([date, diary]) => {
         if (selectedEmotion === "all" || diary.feel === selectedEmotion) {
             const tr = document.createElement("tr");
 
@@ -94,6 +95,15 @@ emotionFilter.addEventListener("change", () => {
     }
 
     document.querySelector("#filterCount").textContent = `${count}개`;
+
+    // 감정 필터링 시 초기화 버튼 hidden
+    resetFilterBtn.hidden = selectedEmotion != "all" ? false : true;
+});
+
+// 감정 필터링 초기화
+resetFilterBtn.addEventListener("click", () => {
+    emotionFilter.value = "all";
+    emotionFilter.dispatchEvent(new Event("change"));
 });
 
 // AI 피드백 스타일 설정 보이기
@@ -127,6 +137,9 @@ function saveAiSet() {
 
     hideAiSetting();
     alert("AI 피드백 스타일이 변경되었습니다.");
+
+    // 설정 변경 버튼으로 포커스 복귀
+    document.querySelector("#changeAiSet").focus();
 }
 
 // AI 피드백 설정 페이지 이동
@@ -166,6 +179,8 @@ function showAiSetItems(index) {
     if (index != selectAiSetItems.length - 1) {
         nextBtn.onclick = () => showAiSetItems(index + 1);
     }
+
+    selectAiSetItems[index].querySelector('input[type="radio"]')?.focus();
 }
 
 // input:radio 클릭 시 버튼 disabled 해제

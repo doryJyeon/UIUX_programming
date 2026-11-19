@@ -5,6 +5,8 @@
 	#A69AC4
 	light color
 	#F0EBF5
+	middle 
+	#C8BEDD
 	deep color
 	#75658F
 	dark (font)
@@ -118,7 +120,7 @@ nav.header-nav {
 }
 
 .nav-menu>li>a {
-	color: #666666cd;
+	color: #555555;
 }
 
 .nav-menu>li>a {
@@ -296,6 +298,14 @@ button.btn-danger,
 	color: #E96B6B;
 	box-sizing: border-box;
 	border: 1px solid #E96B6B;
+}
+
+button.btn-transparent,
+.btn-transparent {
+	background-color: transparent;
+	color: inherit;
+	box-sizing: border-box;
+	border: none;
 }
 
 button:hover,
