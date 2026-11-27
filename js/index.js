@@ -109,9 +109,9 @@ function setCurrentMenu(id) {
     });
 }
 
-// 상단에서 110px 이하 영역 진입했을 때 현재 메뉴 변경
+// 상단에서 80px 이하 영역 진입했을 때 현재 메뉴 변경
 function updateCurrentMenu() {
-    const targetY = 110;
+    const targetY = 70;
     let currentSection = sections[0];
 
     sections.forEach(section => {

@@ -1,27 +1,17 @@
-/*
-	사용하는 색상 정리
-
-	main color(purple)
-	#A69AC4
-	light color
-	#F0EBF5
-	middle 
-	#C8BEDD
-	deep color
-	#75658F
-	dark (font)
-	#423B4D
-	cream color(body background)
-	#FDFAF6
-	yellow
-	#F6C94C
-	red
-	#E96B6B
-	blue
-	#8CAED7
-	green
-	#A9BF88
-*/
+:root {
+	--color-main: #A69AC4;
+	--color-light: #F0EBF5;
+	--color-middle: #C8BEDD;
+	--color-deep: #75658F;
+	--color-focus: #F6C94C;
+	--color-dark: #332E3B;
+	--color-cream: #FDFAF6;
+	--color-cream-header: #FDFAF6E9;
+	--color-yellow: #F6C94C;
+	--color-red: #E96B6B;
+	--color-blue: #8CAED7;
+	--color-green: #A9BF88;
+}
 
 body {
 	font-family: "Gowun Dodum", sans-serif;
@@ -30,9 +20,13 @@ body {
 	line-height: 1.6;
 	margin: 0;
 	padding: 0;
-	background-color: #FDFAF6;
+	background-color: var(--color-cream);
 	word-break: keep-all;
 	position: relative;
+}
+
+body:has(dialog[open]) {
+	overflow: hidden;
 }
 
 *,
@@ -50,23 +44,23 @@ body {
 }
 
 .bg-red {
-	background-color: #E96B6B;
+	background-color: var(--color-red);
 }
 
 .bg-yellow {
-	background-color: #F6C94C;
+	background-color: var(--color-yellow);
 }
 
 .bg-green {
-	background-color: #A9BF88;
+	background-color: var(--color-green);
 }
 
 .bg-blue {
-	background-color: #8CAED7;
+	background-color: var(--color-blue);
 }
 
 .bg-main {
-	background-color: #A69AC4;
+	background-color: var(--color-main);
 }
 
 .bg-transparent {
@@ -83,9 +77,9 @@ header {
 	height: 80px;
 	padding: 15px calc(((100% - 1200px) / 2) + 24px);
 	position: fixed;
-	background: #FDFAF6e9;
-	z-index: 500;
+	background: var(--color-cream-header);
 	top: 0;
+	z-index: 100;
 }
 
 nav.header-nav {
@@ -130,7 +124,7 @@ nav.header-nav {
 
 .nav-menu button {
 	background: transparent;
-	color: #423B4D;
+	color: var(--color-dark);
 	font-weight: bold;
 	opacity: .8;
 	padding: 0;
@@ -138,9 +132,9 @@ nav.header-nav {
 }
 
 .nav-menu>li>a.is-current {
-	color: #75658F;
+	color: var(--color-deep);
 	opacity: 1;
-	border-bottom: 1px solid #75658F;
+	border-bottom: 1px solid var(--color-deep);
 }
 
 #menuToggleBtn {
@@ -176,7 +170,7 @@ nav {
 }
 
 a {
-	color: #75658F;
+	color: var(--color-deep);
 	font-weight: bold;
 	letter-spacing: 1px;
 	text-decoration: none;
@@ -184,28 +178,27 @@ a {
 }
 
 a:hover {
-	color: #A69AC4;
+	color: var(--color-main);
 	transform: translateY(-5px);
 }
 
 .nav-menu>li>a:hover {
-	color: #A69AC4;
+	color: var(--color-main);
 	opacity: 1;
 }
 
 a:focus {
-	outline: 2px solid #A9BF88;
-	outline-offset: 2px;
+	outline: 2px solid var(--color-focus);
 }
 
 a:active {
 	outline: none;
-	color: #75658F;
+	color: var(--color-deep);
 	opacity: 0.7;
 }
 
 .nav-menu>li>a:active {
-	color: #75658F;
+	color: var(--color-deep);
 }
 
 h1 {
@@ -226,14 +219,14 @@ h2 {
 }
 
 h3 {
-	color: #75658F;
+	color: var(--color-deep);
 	font-size: 20px;
 	font-weight: 700;
 	line-height: 1.5;
 }
 
 p {
-	color: #423B4D;
+	color: var(--color-dark);
 	line-height: 1.7;
 	font-weight: 500;
 }
@@ -252,7 +245,7 @@ button,
 input:not([type="checkbox"]):not([type="radio"]) {
 	min-width: 100px;
 	padding: 5px 12px;
-	border: 1px solid #A69AC4;
+	border: 1px solid var(--color-main);
 	border-radius: 6px;
 	margin-right: 10px;
 }
@@ -261,8 +254,8 @@ button,
 .btn {
 	flex: 1;
 	padding: 6px 18px;
-	background-color: #75658F;
-	color: #FDFAF6;
+	background-color: var(--color-deep);
+	color: var(--color-cream);
 	border: none;
 	border-radius: 6px;
 	cursor: pointer;
@@ -272,9 +265,9 @@ button,
 button.btn-white,
 .btn-white {
 	background-color: #fff;
-	color: #75658F;
+	color: var(--color-deep);
 	box-sizing: border-box;
-	border: 1px solid #A69AC4;
+	border: 1px solid var(--color-main);
 }
 
 button.btn-gray,
@@ -290,15 +283,15 @@ button.btn-normal,
 	background-color: #fff;
 	color: #332E3B;
 	box-sizing: border-box;
-	border: 1px solid #A69AC4;
+	border: 1px solid var(--color-main);
 }
 
 button.btn-danger,
 .btn-danger {
 	background-color: #fff;
-	color: #E96B6B;
+	color: var(--color-red);
 	box-sizing: border-box;
-	border: 1px solid #E96B6B;
+	border: 1px solid var(--color-red);
 }
 
 button.btn-transparent,
@@ -311,62 +304,62 @@ button.btn-transparent,
 
 button:hover,
 .btn:hover {
-	background-color: #A69AC4;
-	color: #423B4D;
+	background-color: var(--color-main);
+	color: var(--color-dark);
 }
 
 button.btn-danger:hover,
 .btn-danger:hover {
-	background-color: #E96B6B;
+	background-color: var(--color-red);
 	color: #fff;
 }
 
 button:focus,
 .btn:focus {
-	outline: 2px solid #A9BF88;
+	outline: 2px solid var(--color-focus);
+	outline-offset: 2px;
 }
 
 input:focus {
-	outline: 2px solid #A9BF88;
-	outline-offset: 2px;
+	outline: 2px solid var(--color-focus);
 }
 
 button:active,
 .btn:active {
 	outline: none;
-	background-color: #75658F;
+	background-color: var(--color-deep);
 	transform: scale(1.05);
-	color: #FDFAF6;
+	color: var(--color-cream);
 }
 
 button.btn-danger:active,
 .btn-danger:active {
-	background-color: #E96B6B;
+	background-color: var(--color-red);
 	color: #fff;
 	opacity: 0.7;
 }
 
 button:disabled {
 	background-color: lightgray;
-	color: #423B4D;
+	color: var(--color-dark);
 	cursor: not-allowed;
 }
 
 .c-danger {
-	color: #E96B6B !important;
+	color: var(--color-red) !important;
 }
 
 .c-green {
-	color: #F6C94C;
+	color: var(--color-yellow);
 }
 
 .c-success {
-	color: #75658F;
+	color: var(--color-deep);
 	font-weight: bold;
 }
 
 .border-danger {
-	border-color: #E96B6B !important;
+	border-color: var(--color-red) !important;
 }
 
 @media (max-width: 1248px) {
@@ -385,7 +378,7 @@ button:disabled {
 		width: 100%;
 		max-width: 400px;
 		height: 100vh;
-		background: #FDFAF6;
+		background: var(--color-cream);
 		padding: 30px 24px 50px;
 		box-shadow: #00000055 0px 0px 10px;
 		right: 0;
@@ -423,7 +416,7 @@ button:disabled {
 	}
 
 	.nav-menu>li>a {
-		color: #423B4D;
+		color: var(--color-dark);
 		padding: 5px 0;
 	}
 
@@ -434,7 +427,7 @@ button:disabled {
 
 	.nav-menu>li>a.is-current {
 		width: 100%;
-		background: #75658F;
+		background: var(--color-deep);
 		color: #fff;
 		font-weight: normal;
 		margin-left: -10px;
@@ -490,7 +483,7 @@ button:disabled {
 	header.is-open {
 		width: 400px;
 		height: 100vh;
-		background: #FDFAF6;
+		background: var(--color-cream);
 		padding: 30px 24px 50px;
 		box-shadow: #aaaaaa 2px 0px 10px;
 	}

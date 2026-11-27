@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>감정 일기 더미 데이터 생성기</title>
+  <style>
+    :root {
+      --color-main: #A69AC4;
+      --color-light: #F0EBF5;
+      --color-deep: #75658F;
+      --color-dark: #423B4D;
+      --color-cream: #FDFAF6;
+      --color-yellow: #F6C94C;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 40px 20px;
+      background: var(--color-cream);
+      color: var(--color-dark);
+      font-family: Arial, "Noto Sans KR", sans-serif;
+      line-height: 1.6;
+    }
+
+    .container {
+      width: min(760px, 100%);
+      margin: 0 auto;
+      padding: 32px;
+      background: #fff;
+      border: 1px solid var(--color-light);
+      border-radius: 18px;
+      box-shadow: 0 8px 28px rgb(66 59 77 / 7%);
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      color: var(--color-deep);
+      font-size: 26px;
+    }
+
+    .description {
+      margin: 0 0 24px;
+      color: #6f6878;
+    }
+
+    .info {
+      margin-bottom: 22px;
+      padding: 16px 18px;
+      background: var(--color-light);
+      border-radius: 12px;
+      font-size: 14px;
+    }
+
+    .info p {
+      margin: 4px 0;
+    }
+
+    code {
+      color: var(--color-deep);
+      font-weight: 700;
+    }
+
+    button,
+    a {
+      min-height: 46px;
+      padding: 11px 22px;
+      border: 0;
+      border-radius: 9px;
+      background: var(--color-deep);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    a {
+      display: inline-block;
+      background-color: transparent;
+      color: var(--color-deep);
+      text-decoration: none;
+    }
+
+    button:hover,
+    a:hover {
+      background: var(--color-dark);
+      color: #fff;
+    }
+
+    button:focus-visible,
+    a:focus-visible {
+      outline: 3px solid var(--color-yellow);
+      outline-offset: 3px;
+    }
+
+    .note {
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1px solid var(--color-light);
+      color: #77717D;
+      font-size: 13px;
+    }
+
+    @media (max-width: 520px) {
+      body {
+        padding: 20px 12px;
+      }
+
+      .container {
+        padding: 22px 18px;
+      }
+
+      h1 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <h1>감정 일기 더미 데이터 생성기</h1>
+    <p class="description">
+      일기 추가하기 버튼을 누르면 로컬스토리지에 최대 15개 일기가 추가됩니다.
+    </p>
+
+    <section class="info" aria-label="생성 정보">
+      <p><strong>저장 위치:</strong> <code>localStorage</code> - <code>diaries</code></p>
+      <p><strong>날짜 범위:</strong> 2026-09-01 ~ 2026-10-07</p>
+      <p><strong>생성 개수:</strong> 최대 15개</p>
+      <p><strong>일기 내용:</strong> 각 20~200자</p>
+    </section>
+
+    <button type="button" id="addDummyData">일기 추가하기</button>
+    <a href="my_page.html">마이페이지 이동</a>
+
+    <p class="note">
+      기존 일기는 덮어쓰지 않습니다.
+      같은 브라우저 및 같은 주소(origin)에서 실행되는 페이지끼리 로컬스토리지를 공유하므로,
+      프로젝트를 실행하는 Live Server 환경에서 이 파일을 열어 주세요.
+    </p>
+  </main>
+
+  <script>
+    const STORAGE_KEY = "diaries";
+    const START_DATE = "2026-09-01";
+    const END_DATE = "2026-10-07";
+    const ADD_COUNT = 15;
+
+    // feel 값은 감정 선택 메뉴의 value와 동일하게 사용합니다.
+    const dummyEntries = [
+      {
+        title: "작은 여유가 좋았던 날",
+        feel: "happy",
+        content: "아침부터 햇살이 좋아서 평소보다 조금 일찍 산책을 나갔다. 좋아하는 노래를 들으며 천천히 걷다 보니 마음이 한결 가벼워졌다. 별일 없는 하루도 충분히 기분 좋을 수 있다는 생각이 들었다."
+      },
+      {
+        title: "오랜만의 반가운 연락",
+        feel: "good",
+        content: "한동안 연락하지 못했던 친구에게 먼저 메시지를 보냈다. 생각보다 대화가 길어졌고 예전 추억도 떠올랐다. 자주 만나지는 못해도 서로 안부를 물을 사람이 있다는 게 참 든든하게 느껴졌다."
+      },
+      {
+        title: "조용히 보낸 오후",
+        feel: "comfortable",
+        content: "오늘은 특별한 약속 없이 집에서 시간을 보냈다. 밀린 정리를 조금 하고 따뜻한 차도 마셨다. 해야 할 일이 남아 있기는 하지만 잠깐 속도를 늦추니 머릿속이 차분해지는 것 같았다."
+      },
+      {
+        title: "기대했던 일이 잘 풀렸다",
+        feel: "happy",
+        content: "며칠 동안 신경 쓰였던 일을 마무리했다. 결과가 완벽하지는 않아도 끝까지 해냈다는 사실이 뿌듯했다. 스스로에게 작은 선물을 주고 싶어서 좋아하는 디저트도 사 왔다."
+      },
+      {
+        title: "조금 지쳤던 하루",
+        feel: "sad",
+        content: "오늘은 사소한 일에도 마음이 쉽게 지쳤다. 평소라면 넘겼을 말도 계속 생각나서 집중하기 어려웠다. 당장 답을 찾으려고 애쓰기보다는 일찍 쉬면서 기분을 정리해 보기로 했다."
+      },
+      {
+        title: "새로운 곳을 발견했다",
+        feel: "good",
+        content: "집 근처 골목을 걷다가 작은 카페를 발견했다. 창가 자리에 앉아 커피를 마시며 책을 읽었는데 생각보다 마음에 들었다. 다음에는 시간을 넉넉히 내서 다시 방문하고 싶다."
+      },
+      {
+        title: "괜히 마음이 무거운 날",
+        feel: "bad",
+        content: "딱히 큰일이 있었던 것은 아닌데 하루 종일 기분이 가라앉아 있었다. 할 일을 미루고 있다는 생각에 마음이 더 복잡해졌다. 오늘은 작은 일 하나만 끝내고 나머지는 내일 다시 시작하려고 한다."
+      },
+      {
+        title: "나를 위한 저녁 시간",
+        feel: "comfortable",
+        content: "저녁에는 휴대전화를 잠시 내려놓고 좋아하는 음식을 만들어 먹었다. 식사를 마친 뒤에는 창문을 열어 환기도 했다. 바쁘게 지나간 하루 끝에 이런 시간이 필요했다는 걸 새삼 느꼈다."
+      },
+      {
+        title: "생각보다 괜찮았던 도전",
+        feel: "happy",
+        content: "평소 어렵게 느껴졌던 일에 용기를 내서 도전했다. 시작하기 전에는 걱정이 많았지만 막상 해 보니 생각보다 할 만했다. 결과와 상관없이 시도했다는 점을 오늘은 칭찬해 주고 싶다."
+      },
+      {
+        title: "말 한마디가 오래 남았다",
+        feel: "sad",
+        content: "누군가 무심코 한 말이 계속 마음에 걸렸다. 상대에게는 별뜻이 없었을 수도 있지만 나는 조금 서운했다. 감정을 쌓아 두기보다는 다음에 기회가 되면 차분하게 내 마음을 이야기해 봐야겠다."
+      },
+      {
+        title: "할 일을 하나씩 해결했다",
+        feel: "good",
+        content: "미뤄 두었던 일들을 목록으로 적고 하나씩 처리했다. 전부 끝내지는 못했지만 눈에 보이는 진전이 생기니 마음이 편해졌다. 내일 해야 할 일도 미리 정리해 두어서 조금 안심이 된다."
+      },
+      {
+        title: "평범해서 더 편안한 하루",
+        feel: "comfortable",
+        content: "늘 하던 대로 일어나고 식사하고 해야 할 일을 했다. 특별한 사건은 없었지만 불편한 일도 크게 없었다. 가끔은 이런 평범하고 안정적인 하루가 가장 고맙다는 생각이 든다."
+      },
+      {
+        title: "괜히 서두르지 않기로 했다",
+        feel: "bad",
+        content: "계획대로 일이 진행되지 않아 조급한 마음이 들었다. 다른 사람과 비교할수록 더 불안해지는 것 같아서 잠시 생각을 멈췄다. 내 속도대로 해도 괜찮다고 스스로에게 말해 주기로 했다."
+      },
+      {
+        title: "기분 좋은 칭찬을 들었다",
+        feel: "happy",
+        content: "오늘 내가 한 일을 좋게 봐 주는 말을 들었다. 별것 아닌 것처럼 넘기려 했지만 사실은 꽤 기뻤다. 그동안 들인 시간이 헛되지 않았다는 느낌이 들어 조금 더 자신감이 생겼다."
+      },
+      {
+        title: "잠깐 쉬어 가기",
+        feel: "good",
+        content: "오후에 집중이 잘되지 않아 잠깐 밖으로 나갔다. 바람을 쐬고 돌아와 물을 마시니 다시 시작할 힘이 생겼다. 쉬는 시간을 낭비라고 생각하지 말고 필요한 과정으로 받아들여야겠다."
+      }
+    ];
+
+    function getDateRange(startDate, endDate) {
+      const dates = [];
+      const current = new Date(`${startDate}T12:00:00`);
+      const end = new Date(`${endDate}T12:00:00`);
+
+      while (current <= end) {
+        const year = current.getFullYear();
+        const month = String(current.getMonth() + 1).padStart(2, "0");
+        const day = String(current.getDate()).padStart(2, "0");
+        dates.push(`${year}-${month}-${day}`);
+        current.setDate(current.getDate() + 1);
+      }
+      return dates;
+    }
+
+    function shuffle(array) {
+      const result = [...array];
+      for (let i = result.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [result[i], result[j]] = [result[j], result[i]];
+      }
+      return result;
+    }
+
+    // 오류 발생 시 알림 후 새로고침
+    function reloadOnError(message) {
+      alert(message);
+      location.reload();
+    }
+
+    function addDummyDiaries() {
+      let diaries;
+
+      try {
+        const savedData = localStorage.getItem(STORAGE_KEY);
+        diaries = savedData ? JSON.parse(savedData) : {};
+      } catch (error) {
+        alert("diaries 데이터를 읽지 못했습니다. 로컬스토리지 값을 확인해 주세요.");
+        return;
+      }
+
+      if (!diaries || typeof diaries !== "object" || Array.isArray(diaries)) {
+        reloadOnError("diaries 데이터 형식이 올바르지 않습니다.");
+        return;
+      }
+
+
+      const availableDates = getDateRange(START_DATE, END_DATE)
+        .filter((date) => !Object.prototype.hasOwnProperty.call(diaries, date));
+
+      // 추가할 날짜와 일기 개수 계산
+      const selectedDates = shuffle(availableDates).slice(0, ADD_COUNT);
+      const shuffledEntries = shuffle(dummyEntries);
+      const addCount = Math.min(selectedDates.length, shuffledEntries.length);
+
+      if (addCount === 0) {
+        alert("추가할 수 있는 일자가 없습니다.");
+        return;
+      }
+
+      const addedEntries = selectedDates.slice(0, addCount).map((date, index) => ({
+        date,
+        ...shuffledEntries[index]
+      }));
+
+      addedEntries.forEach(({ date, title, feel, content }) => {
+        diaries[date] = { title, feel, content };
+      });
+
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(diaries));
+      } catch (error) {
+        alert("로컬스토리지에 저장하지 못했습니다. 저장 공간이나 브라우저 설정을 확인해 주세요.");
+        return;
+      }
+
+      alert(`${addedEntries.length}개의 일기가 추가되었습니다.\n마이페이지로 이동합니다.`);
+      location.href = "my_page.html";
+    }
+
+    document.getElementById("addDummyData").addEventListener("click", addDummyDiaries);
+  </script>
+</body>
+
+</html>

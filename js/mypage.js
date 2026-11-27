@@ -5,6 +5,7 @@ const emotionFilter = document.querySelector("#emotionFilter");
 const resetFilterBtn = document.querySelector("#resetFilterBtn");
 // 작성한 일기
 const diaryList = document.querySelector("#diaryList");
+const modal = document.getElementById("diaryModal");
 const diaryContent = document.querySelector("#diaryContent");
 // 설정
 const userAiSet = document.querySelector("#userAiSet");
@@ -51,8 +52,8 @@ document.addEventListener("DOMContentLoaded", () => {
         diaryContents.innerHTML = sortedDiaries.map(([date, diary]) => `
             <tr>
                 <td>${date.replaceAll("-", ".")}</td>
-                <td><p onclick="showDiaryContent('${date}')">${diary.title}</p></td>
-                <td><img src="assets/images/emoji/face_${diary.feel}.png" alt="${diary.feel} 표정"></td>
+                <td><button type="button" onclick="openDiaryModal('${date}')">${diary.title}</button></td>
+                <td><img src="assets/images/emoji/face_${diary.feel}.png" alt="${diary.feel}한 표정"></td>
             </tr>
         `).join("");
 
@@ -79,8 +80,8 @@ emotionFilter.addEventListener("change", () => {
 
             tr.innerHTML = `
                 <td>${date.replaceAll("-", ".")}</td>
-                <td><p onclick="showDiaryContent('${date}')">${diary.title}</p></td>
-                <td><img src="assets/images/emoji/face_${diary.feel}.png" alt="${diary.feel} 표정"></td>
+                <td><button type="button" onclick="openDiaryModal('${date}')">${diary.title}</button></td>
+                <td><img src="assets/images/emoji/face_${diary.feel}.png" alt="${diary.feel}한 표정"></td>
             `;
 
             diaryContents.appendChild(tr);
@@ -190,19 +191,17 @@ selectAiSetInputRadios.forEach(radio =>
     })
 )
 
-// 일기 상세 내용 열기
-function showDiaryContent(date) {
+// 일기 내용 모달 열기
+function openDiaryModal(date) {
     const getDiary = existingDiaries[date];
     diaryContent.querySelector(".diary-date").textContent = date.replaceAll("-", ".");
     diaryContent.querySelector(".diary-face").src = `assets/images/emoji/face_${getDiary.feel}.png`;
     diaryContent.querySelector(".diary-title").textContent = getDiary.title;
     diaryContent.querySelector(".diary-content").textContent = getDiary.content;
 
-    diaryList.classList.add("d-none");
-    diaryContent.classList.remove("d-none");
+    modal.showModal();
 }
-// 일기 상세 내용 닫기
-function hideDiaryContent() {
-    diaryList.classList.remove("d-none");
-    diaryContent.classList.add("d-none");
+// 일기 내용 모달 닫기
+function closeDiaryModal() {
+    modal.close();
 }

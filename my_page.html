@@ -67,23 +67,11 @@
 						<tbody id="diaryContents">
 							<tr>
 								<td>2026.10.24</td>
-								<td><a href="#">일기 제목 부분입니다.</a></td>
+								<td><button type="button">일기 제목 부분입니다.</button></td>
 								<td><img src="assets/images/emoji/face_good.png" alt=""></td>
 							</tr>
 						</tbody>
 					</table>
-				</div>
-			</div>
-
-			<div class="d-none" id="diaryContent">
-				<button class="close-diary" onclick="hideDiaryContent()"><i class="bi bi-x-square"></i></button>
-				<div class="diary-date-face">
-					<h4 class="diary-date">2026.10.25</h4>
-					<img class="diary-face" src="assets/images/emoji/face_good.png" alt="">
-				</div>
-				<h3 class="diary-title">제목</h3>
-				<div class="diary-content">
-					내용
 				</div>
 			</div>
 		</section>
@@ -198,6 +186,20 @@
 		</section>
 	</main>
 
+	<dialog id="diaryModal" aria-labelledby="modalTitle">
+		<div id="diaryContent" class="modal-content">
+			<div class="diary-header">
+				<img class="diary-face" src="assets/images/emoji/face_good.png" alt="">
+				<h2 class="diary-date">2026.10.25</h2>
+				<h3 class="diary-title">제목</h3>
+			</div>
+			<div class="diary-content">
+				내용
+			</div>
+		</div>
+
+		<button class="close-diary" onclick="closeDiaryModal()"><i class="bi bi-x-square"></i></button>
+	</dialog>
 
 	<footer>
 		<p>&copy; 2026 감정 일기 서비스</p>
